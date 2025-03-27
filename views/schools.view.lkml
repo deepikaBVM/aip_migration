@@ -5,7 +5,7 @@ view: schools {
   dimension: id {
     primary_key: yes
     type: number
-    sql: ${TABLE}.Id ;;
+    sql: CAST(${TABLE}.Id AS INT);;
   }
   dimension: code {
     type: string
@@ -40,7 +40,7 @@ view: schools {
   dimension: school_district_id {
     type: number
     # hidden: yes
-    sql: ${TABLE}.SchoolDistrictId ;;
+    sql: CAST(${TABLE}.SchoolDistrictId AS INT);;
   }
   dimension: school_type_id {
     type: number
