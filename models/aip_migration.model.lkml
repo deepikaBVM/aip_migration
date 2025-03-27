@@ -124,19 +124,21 @@ explore: tbl_starsschool_grade_data {
   }
 }
 
-explore: tbl_starsschool_grade_data_cr
-{ join: school_districts {
+explore: tbl_starsschool_grade_data_cr {
+  join: school_districts {
     relationship: many_to_one
     type: left_outer
     sql_on: ${tbl_starsschool_grade_data_cr.district_code} = ${school_districts.code};;
   }
+
   join: schools {
     relationship: many_to_one
     type: left_outer
-    sql_on:  ${school_districts.id} = ${schools.school_district_id}
-      and ${schools.code} ${tbl_starsschool_grade_data_cr.school_code};;
+    sql_on: ${school_districts.id} = ${schools.school_district_id}
+      AND ${schools.code} = ${tbl_starsschool_grade_data_cr.school_code};;
   }
 }
+
 
 explore: tbl_starsschool_sub_pop_data {}
 
