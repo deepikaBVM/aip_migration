@@ -121,7 +121,8 @@ explore: tbl_starsschool_grade_data {
   }
 }
 
-explore: tbl_starsschool_grade_data_cr { join: school_districts {
+explore: tbl_starsschool_grade_data_cr
+{ join: school_districts {
     relationship: many_to_one
     type: left_outer
     sql_on: ${tbl_starsschool_grade_data_cr.district_code} = ${school_districts.code};;
