@@ -67,10 +67,10 @@ explore: institution_types {}
 explore: internal_settings {}
 
 explore: school_districts {
-  join: dmltypes {
+   join: schools {
     type: left_outer
-    sql_on: ${school_districts.dmltype_id} = ${dmltypes.id} ;;
-    relationship: many_to_one
+    sql_on: ${schools.school_district_id} = ${school_districts.id} ;;
+    relationship: many_to_many
   }
 }
 
@@ -87,11 +87,6 @@ explore: schools {
     relationship: many_to_one
   }
 
-  join: dmltypes {
-    type: left_outer
-    sql_on: ${schools.dmltype_id} = ${dmltypes.id} ;;
-    relationship: many_to_one
-  }
 }
 
 explore: school_types {}
