@@ -113,11 +113,14 @@ explore: tbl_starsschool_grade_data {
     type: left_outer
     sql_on: ${tbl_starsschool_grade_data.district_code} = ${school_districts.code};;
   }
+
   join: schools {
     relationship: many_to_one
     type: left_outer
-    sql_on:  ${school_districts.id} = ${schools.school_district_id} ;;
+    sql_on: ${school_districts.id} = ${schools.school_district_id} ;;
 
+    # Filter to ensure all schools from a specific district are returned
+    sql_where: ${school_districts.id} = {% condition district_id %} ${school_districts.id} {% endcondition %} ;;
   }
 }
 
