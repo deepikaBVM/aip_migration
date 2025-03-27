@@ -9,7 +9,7 @@ view: school_districts {
   }
   dimension: code {
     type: string
-    sql: ${TABLE}.Code ;;
+    sql: CAST(${TABLE}.Code AS INT) ;;
   }
   dimension: created_by {
     type: string

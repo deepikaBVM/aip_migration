@@ -9,7 +9,7 @@ view: schools {
   }
   dimension: code {
     type: string
-    sql: ${TABLE}.Code ;;
+    sql: CAST(${TABLE}.Code AS INT);;
   }
   dimension: created_by {
     type: string
@@ -63,15 +63,15 @@ view: schools {
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
-	id,
-	name,
-	school_districts.id,
-	school_districts.name,
-	school_types.id,
-	school_types.name,
-	dmltypes.id,
-	dmltypes.name
-	]
+  id,
+  name,
+  school_districts.id,
+  school_districts.name,
+  school_types.id,
+  school_types.name,
+  dmltypes.id,
+  dmltypes.name
+  ]
   }
 
 }

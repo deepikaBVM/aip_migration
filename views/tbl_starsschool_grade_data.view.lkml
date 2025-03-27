@@ -2,12 +2,12 @@ view: tbl_starsschool_grade_data {
   sql_table_name: dbo.tbl_STARSSchoolGradeData ;;
 
   measure: current_year_oar {
-    type: sum
-    sql: CAST(${TABLE}.CurrentYearOAR AS INT);;
+    type: average
+    sql: CAST(${TABLE}.CurrentYearOAR AS FLOAT);;
   }
   dimension: district_code {
     type: string
-    sql: ${TABLE}.DistrictCode ;;
+    sql: CAST(${TABLE}.DistrictCode AS INT) ;;
   }
   measure: enroll_number {
     type: sum
@@ -31,7 +31,7 @@ view: tbl_starsschool_grade_data {
   }
   dimension: school_code {
     type: string
-    sql: ${TABLE}.SchoolCode ;;
+    sql: CAST(${TABLE}.SchoolCode AS INT);;
   }
   dimension: starsschool_year {
     type: string
