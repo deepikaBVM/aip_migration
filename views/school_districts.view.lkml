@@ -5,7 +5,7 @@ view: school_districts {
   dimension: id {
     primary_key: yes
     type: number
-    sql: ${TABLE}.Id ;;
+    sql: CAST(${TABLE}.Id AS INT);;
   }
   dimension: code {
     type: string
