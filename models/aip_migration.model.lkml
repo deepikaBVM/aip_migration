@@ -140,8 +140,20 @@ explore: tbl_starsschool_grade_data_cr {
 }
 
 
-explore: tbl_starsschool_sub_pop_data {}
+explore: tbl_starsschool_sub_pop_data {
+  join: subpopulation_types {
+    relationship: many_to_one
+    type: left_outer
+    sql_on: ${subpopulation_types.sub_pop_item_code} = ${tbl_starsschool_sub_pop_data.sub_pop_item_code} ;;
+  }
+}
 
-explore: tbl_starsschool_sub_pop_data_cr {}
+explore: tbl_starsschool_sub_pop_data_cr {
+  join: subpopulation_types {
+    relationship: many_to_one
+    type: left_outer
+    sql_on: ${subpopulation_types.sub_pop_item_code} = ${tbl_starsschool_sub_pop_data_cr.sub_pop_item_code} ;;
+  }
+}
 
 explore: tbl_starssnap_shot_data_cr {}
