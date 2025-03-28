@@ -135,7 +135,7 @@ explore: tbl_starsschool_grade_data_cr {
     relationship: many_to_one
     type: left_outer
     sql_on: ${school_districts.id} = ${schools.school_district_id}
-      AND ${schools.code} = ${tbl_starsschool_grade_data_cr.school_code};;
+      ;;
   }
 }
 
