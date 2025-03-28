@@ -137,6 +137,21 @@ explore: tbl_starsschool_grade_data_cr {
     sql_on: ${school_districts.id} = ${schools.school_district_id}
       ;;
   }
+
+  join: tbl_starsschool_sub_pop_data  {
+    relationship: one_to_many
+    type: left_outer
+    sql: ${tbl_starsschool_grade_data_cr.district_code} = ${tbl_starsschool_sub_pop_data.district_code}
+        and ${tbl_starsschool_grade_data_cr.school_code} = ${tbl_starsschool_sub_pop_data.school_code}
+        and ${tbl_starsschool_grade_data_cr.starsschool_year} = ${tbl_starsschool_sub_pop_data.starsschool_year}
+        ;;
+  }
+
+  join: subpopulation_types {
+    relationship: many_to_one
+    type: left_outer
+    sql_on: ${subpopulation_types.sub_pop_item_code} = ${tbl_starsschool_sub_pop_data.sub_pop_item_code} ;;
+  }
 }
 
 
