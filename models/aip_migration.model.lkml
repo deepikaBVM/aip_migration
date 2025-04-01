@@ -65,6 +65,7 @@ explore: implementation_steps_history {
 explore: institution_types {}
 
 explore: internal_settings {}
+explore: plans {}
 
 explore: school_districts {
    join: schools {
