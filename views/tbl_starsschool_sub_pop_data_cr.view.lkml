@@ -7,7 +7,7 @@ view: tbl_starsschool_sub_pop_data_cr {
   }
   dimension: district_code {
     type: string
-    sql: ${TABLE}.DistrictCode ;;
+    sql: CAST(${TABLE}.DistrictCode AS INT);;
   }
   measure: enroll_number {
     type: sum
@@ -35,11 +35,11 @@ view: tbl_starsschool_sub_pop_data_cr {
   }
   dimension: school_code {
     type: string
-    sql: ${TABLE}.SchoolCode ;;
+    sql: CAST(${TABLE}.SchoolCode AS INT);;
   }
   dimension: starsschool_year {
     type: string
-    sql: ${TABLE}.STARSSchoolYear ;;
+    sql: CAST(${TABLE}.STARSSchoolYear AS DATE);;
   }
   dimension: school_year {
     type: string
