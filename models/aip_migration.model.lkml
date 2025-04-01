@@ -121,7 +121,7 @@ explore: tbl_starsschool_grade_data {
     sql_on: ${school_districts.id} = ${schools.school_district_id} ;;
 
     # Filter to ensure all schools from a specific district are returned
-    sql_where: ${school_districts.id} = {% condition district_id %} ${school_districts.id} {% endcondition %} ;;
+    #sql_where: ${school_districts.id} = {% condition district_id %} ${school_districts.id} {% endcondition %} ;;
   }
 }
 
