@@ -84,9 +84,10 @@ explore: schools {
   }
 
   join: school_types {
-    type: left_outer
-    sql_on: ${schools.school_type_id} = ${school_types.id} ;;
     relationship: many_to_one
+    type: full_outer
+    sql_on: ${schools.school_type_id} = ${school_types.id} ;;
+
   }
 
 }
