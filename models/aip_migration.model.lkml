@@ -138,7 +138,7 @@ explore: tbl_starsschool_grade_data_cr
   join: schools {
     #relationship: many_to_one
     #type: left_outer
-    relationship: many_to_one
+    relationship: one_to_many
     type:  full_outer
     sql_on: ${school_districts.id} = ${schools.school_district_id} ;;
   }
