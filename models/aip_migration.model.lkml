@@ -77,9 +77,10 @@ explore: school_districts {
 
 explore: schools {
   join: school_districts {
-    type: left_outer
-    sql_on: ${schools.school_district_id} = ${school_districts.id} ;;
     relationship: many_to_one
+    type: full_outer
+    sql_on: ${schools.school_district_id} = ${school_districts.id} ;;
+
   }
 
   join: school_types {
