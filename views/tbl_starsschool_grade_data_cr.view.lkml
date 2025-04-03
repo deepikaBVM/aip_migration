@@ -10,7 +10,7 @@ view: tbl_starsschool_grade_data_cr {
     sql: CAST(${TABLE}.DistrictCode AS INT) ;;
   }
   measure: enroll_number {
-    type: sum
+   type: sum
     sql: CAST(${TABLE}.EnrollNumber AS INT) ;;
   }
   dimension: grade_item_code {

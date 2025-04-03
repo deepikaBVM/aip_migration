@@ -125,18 +125,22 @@ explore: tbl_starsschool_grade_data {
   }
 }
 
-explore: tbl_starsschool_grade_data_cr {
+explore: tbl_starsschool_grade_data_cr
+{
   join: school_districts {
-    relationship: many_to_one
-    type: left_outer
-    sql_on: ${tbl_starsschool_grade_data_cr.district_code} = ${school_districts.code};;
+   # relationship: many_to_one
+   # type: left_outer
+   relationship: many_to_many
+   type: full_outer
+   sql_on: ${tbl_starsschool_grade_data_cr.district_code} = ${school_districts.code};;
   }
 
   join: schools {
+    #relationship: many_to_one
+    #type: left_outer
     relationship: many_to_one
-    type: left_outer
-    sql_on: ${school_districts.id} = ${schools.school_district_id}
-      ;;
+    type:  full_outer
+    sql_on: ${school_districts.id} = ${schools.school_district_id} ;;
   }
 
   join: tbl_starsschool_sub_pop_data  {
