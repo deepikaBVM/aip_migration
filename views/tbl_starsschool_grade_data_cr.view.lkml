@@ -1,6 +1,13 @@
 view: tbl_starsschool_grade_data_cr {
   sql_table_name: dbo.tbl_STARSSchoolGradeDataCR ;;
 
+  dimension: composite_id {
+    primary_key: yes
+    type: string
+    sql: CONCAT(${TABLE}.DistrictCode, '-', ${TABLE}.SchoolCode, '-', ${TABLE}.GradeItemCode, '-', CAST(${TABLE}.STARSSchoolYear AS VARCHAR)) ;;
+    hidden: yes
+  }
+
   measure: current_year_cas {
     type: sum
     sql: CAST(${TABLE}.CurrentYearCAS AS INT);;
