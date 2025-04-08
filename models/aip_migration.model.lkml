@@ -48,11 +48,11 @@ explore: email_notifications {
 
 explore: entity_types {}
 explore: aip_dashboard_table {
-  #join: subpopulation_types  {
-    #relationship: many_to_one
-    #type: inner
-   # sql_on: ${aip_dashboard_table.sub_pop_item_code} = ${subpopulation_types.sub_pop_item_code} ;;
- # }
+  join: subpopulation_types  {
+  relationship: many_to_one
+  type: inner
+  sql_on: ${aip_dashboard_table.sub_pop_item_code} = ${subpopulation_types.sub_pop_item_code} ;;
+ }
 }
 explore: external_settings {}
 
@@ -162,10 +162,10 @@ explore: tbl_starsschool_grade_data_cr
   }
 
   join: subpopulation_types {
-    relationship: many_to_one
-    type: left_outer
-    sql_on: ${subpopulation_types.sub_pop_item_code} = ${tbl_starsschool_sub_pop_data.sub_pop_item_code}
-    and ${tbl_starsschool_sub_pop_data.school_code} = ${tbl_starsschool_grade_data_cr.school_code}
+    #relationship: many_to_one
+    #type: left_outer
+    #sql_on: ${subpopulation_types.sub_pop_item_code} = ${tbl_starsschool_sub_pop_data.sub_pop_item_code}
+    #and ${tbl_starsschool_sub_pop_data.school_code} = ${tbl_starsschool_grade_data_cr.school_code}
 
   }
 }
