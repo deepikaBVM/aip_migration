@@ -96,7 +96,13 @@ explore: school_types {}
 
 explore: school_years {}
 
-explore: subpopulation_types {}
+explore: subpopulation_types {
+  join: aip_dashboard_table  {
+    relationship: many_to_one
+    type: left_outer
+    sql_on: ${aip_dashboard_table.sub_pop_item_code} = ${subpopulation_types.sub_pop_item_code} ;;
+  }
+}
 
 explore: tbl_starsdistrict_grade_data {}
 
