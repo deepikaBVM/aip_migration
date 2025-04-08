@@ -47,7 +47,7 @@ explore: email_notifications {
 }
 
 explore: entity_types {}
-
+explore: aip_dashboard_table {}
 explore: external_settings {}
 
 explore: grade_types {}
