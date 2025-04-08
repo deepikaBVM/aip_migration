@@ -47,7 +47,13 @@ explore: email_notifications {
 }
 
 explore: entity_types {}
-explore: aip_dashboard_table {}
+explore: aip_dashboard_table {
+  join: subpopulation_types  {
+    relationship: many_to_one
+    type: left_outer
+    sql_on: ${aip_dashboard_table.sub_pop_item_code} = ${subpopulation_types.sub_pop_item_code} ;;
+  }
+}
 explore: external_settings {}
 
 explore: grade_types {}
@@ -96,13 +102,7 @@ explore: school_types {}
 
 explore: school_years {}
 
-explore: subpopulation_types {
-  join: aip_dashboard_table  {
-    relationship: many_to_one
-    type: left_outer
-    sql_on: ${aip_dashboard_table.sub_pop_item_code} = ${subpopulation_types.sub_pop_item_code} ;;
-  }
-}
+explore: subpopulation_types {}
 
 explore: tbl_starsdistrict_grade_data {}
 
