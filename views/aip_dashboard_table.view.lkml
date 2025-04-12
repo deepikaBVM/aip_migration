@@ -7,6 +7,8 @@ dimension: composite_id {
     sql: CONCAT(${TABLE}.DistrictCode, '-', ${TABLE}.SchoolCode, '-', ${TABLE}.GradeItemCode, '-', CAST(${TABLE}.STARSSchoolYear AS VARCHAR)) ;;
     hidden: yes
   }
+  dimension: MapDistrictName {}
+  dimension: SubpopTypeName {}
 
   dimension: district_code {
     type: number
