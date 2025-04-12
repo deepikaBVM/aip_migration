@@ -10,6 +10,52 @@ dimension: composite_id {
   dimension: MapDistrictName {}
   dimension: SubpopTypeName {}
 
+  measure: CAR {
+    type: number
+    value_format_name: "percent_2"
+    sql: ${grade_current_year_cas} / ${grade_enroll_number} ;;
+  }
+
+  dimension: car_ratio {
+    type: number
+    sql: ${grade_current_year_cas} / ${grade_enroll_number} ;;
+  }
+
+  dimension: Tier1 {
+    type: string
+    sql:
+    CASE
+      WHEN ${car_ratio} < 0.05 THEN 'Tier1'
+      ELSE NULL
+    END ;;
+  }
+
+  dimension: Tier2 {
+    type: string
+    sql:
+    CASE
+      WHEN ${car_ratio} > 0.05 and ${car_ratio} < 0.10 THEN 'Tier2'
+      ELSE NULL
+    END ;;
+  }
+
+  dimension: Tier3 {
+    type: string
+    sql:
+    CASE
+      WHEN ${car_ratio} >0.1 and ${car_ratio} < 0.2 THEN 'Tier3'
+      ELSE NULL
+    END ;;
+  }
+
+  dimension: Tier4 {
+    type: string
+    sql:
+    CASE
+      WHEN ${car_ratio} > 0.2 THEN 'Tier4'
+      ELSE NULL
+    END ;;
+  }
   dimension: district_code {
     type: number
     sql: ${TABLE}.DistrictCode ;;
