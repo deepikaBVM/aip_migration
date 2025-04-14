@@ -10,7 +10,8 @@ dimension: composite_id {
   dimension: MapDistrictName {
     type: string
     sql: ${TABLE}.MapDistrictName ;;
-    view_label:"District Name"
+    view_label:" "
+    label: "District Name"
 }
   dimension: SubpopTypeName {}
 
@@ -112,7 +113,8 @@ dimension: composite_id {
   dimension: zipcode {
     type: zipcode
     sql: ${TABLE}.Zipcode ;;
-    view_label: "Zipcode"
+    label: "Zipcode"
+    view_label: " "
   }
   measure: count {
     type: count
