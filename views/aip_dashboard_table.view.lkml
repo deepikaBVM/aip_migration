@@ -112,6 +112,7 @@ dimension: composite_id {
   dimension: zipcode {
     type: zipcode
     sql: ${TABLE}.Zipcode ;;
+    label: "Zipcode"
   }
   measure: count {
     type: count
