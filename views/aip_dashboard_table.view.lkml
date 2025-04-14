@@ -9,8 +9,8 @@ dimension: composite_id {
   }
   dimension: MapDistrictName {
     type: string
-    label: "District Name"
     sql: ${TABLE}.MapDistrictName ;;
+    label: "District Name"
 }
   dimension: SubpopTypeName {}
 
