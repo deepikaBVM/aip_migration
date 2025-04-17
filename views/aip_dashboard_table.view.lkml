@@ -34,7 +34,7 @@ dimension: composite_id {
   measure: CAR {
     type: number
     value_format_name: "percent_2"
-    sql: ${grade_current_year_cas} / ${grade_enroll_number} ;;
+    sql: CAST(${grade_current_year_cas} AS FLOAT) / NULLIF(${grade_enroll_number}, 0) ;;
   }
 
   dimension: grade_item_code {
