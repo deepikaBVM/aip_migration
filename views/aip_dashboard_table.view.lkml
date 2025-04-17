@@ -1,5 +1,5 @@
 view: aip_dashboard_table {
-  sql_table_name: dbo.AIP_DASHBOARD_TABLE ;;
+sql_table_name: dbo.AIP_DASHBOARD_TABLE ;;
 
 dimension: composite_id {
     primary_key: yes
@@ -50,7 +50,6 @@ dimension: composite_id {
       ELSE 'Uncategorized'
     END ;;
   }
-
   dimension: grade_item_code {
     type: string
     sql: ${TABLE}.GradeItemCode ;;
