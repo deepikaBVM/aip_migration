@@ -23,14 +23,20 @@ dimension: composite_id {
     type: string
     sql: ${TABLE}.DistrictName ;;
   }
-  measure: grade_current_year_cas {
-    type: sum
-    sql: CAST(${TABLE}.GradeCurrentYearCAS AS INT);;
-  }
   measure: grade_enroll_number {
     type: sum
     sql: CAST(${TABLE}.GradeEnrollNumber AS INT) ;;
   }
+  measure: grade_current_year_cas {
+    type: sum
+    sql: CAST(${TABLE}.GradeCurrentYearCAS AS INT);;
+  }
+  measure: CAR {
+    type: number
+    value_format_name: "percent_2"
+    sql: ${grade_current_year_cas} / ${grade_enroll_number} ;;
+  }
+
   dimension: grade_item_code {
     type: string
     sql: ${TABLE}.GradeItemCode ;;
