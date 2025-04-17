@@ -37,6 +37,20 @@ dimension: composite_id {
     sql: CAST(${grade_current_year_cas} AS FLOAT) / NULLIF(${grade_enroll_number}, 0) ;;
   }
 
+  dimension: car_tier {
+    type: string
+    sql:
+    CASE
+      WHEN CAST(${grade_current_year_cas} AS FLOAT) / NULLIF(${grade_enroll_number}, 0) < 0.05 THEN 'Tier 1'
+      WHEN CAST(${grade_current_year_cas} AS FLOAT) / NULLIF(${grade_enroll_number}, 0) >= 0.05 AND
+           CAST(${grade_current_year_cas} AS FLOAT) / NULLIF(${grade_enroll_number}, 0) < 0.10 THEN 'Tier 2'
+      WHEN CAST(${grade_current_year_cas} AS FLOAT) / NULLIF(${grade_enroll_number}, 0) >= 0.10 AND
+           CAST(${grade_current_year_cas} AS FLOAT) / NULLIF(${grade_enroll_number}, 0) < 0.20 THEN 'Tier 3'
+      WHEN CAST(${grade_current_year_cas} AS FLOAT) / NULLIF(${grade_enroll_number}, 0) >= 0.20 THEN 'Tier 4'
+      ELSE 'Uncategorized'
+    END ;;
+  }
+
   dimension: grade_item_code {
     type: string
     sql: ${TABLE}.GradeItemCode ;;
