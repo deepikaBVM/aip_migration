@@ -7,10 +7,13 @@ dimension: composite_id {
     sql: CONCAT(${TABLE}.DistrictCode, '-', ${TABLE}.SchoolCode, '-', ${TABLE}.GradeItemCode, '-', CAST(${TABLE}.STARSSchoolYear AS VARCHAR)) ;;
     hidden: yes
   }
+
   dimension: MapDistrictName {
     type: string
     sql: ${TABLE}.MapDistrictName ;;
     view_label:" "
+  #  map_layer_name: school_districts
+  #  html: <p style="color: Yellow; font-size: 100%">{{ value }}</p> ;;
     label: "District Name"
 }
   dimension: SubpopTypeName {}

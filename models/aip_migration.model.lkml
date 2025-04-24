@@ -3,11 +3,34 @@ connection: "aip-bvm"
 # include all the views
 include: "/views/**/*.view.lkml"
 
+map_layer: school_districts {
+  file: "/school_district_boundaries.topojson"
+  property_label_key: "name"
+  format: topojson
+}
+
 datagroup: aip_migration_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
 }
+explore: absentee_tiers {
+  join: school_districts {
+      type: left_outer
+      sql_on: ${absentee_tiers.district_code} = ${school_districts.code} ;;
+      relationship: one_to_many}
+    join: schools {
+      type:  left_outer
+      sql_on: ${absentee_tiers.location_id} = ${schools.code} and
+              ${schools.school_district_id} = ${school_districts.id};;
+      relationship: one_to_many}
+      join: grade_types{
+         type: left_outer
+        sql_on: ${absentee_tiers.curr_grade_ord} = ${grade_types.grade_item_code};;
+        relationship: one_to_many
+    }
+}
 
+explore: aip_dashboard_r1 {}
 persist_with: aip_migration_default_datagroup
 
 explore: answers {
