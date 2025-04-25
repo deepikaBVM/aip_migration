@@ -43,6 +43,11 @@ view: absentee_tiers {
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.SCHOOL_YEAR ;;
   }
+  dimension: school_year {
+    type: string
+    label: "School Year"
+    sql:  CAST(YEAR(${TABLE}.school_year)-1 as varchar)+ '-'+ CAST(YEAR(${TABLE}.school_year) as varchar) ;;
+  }
   dimension_group: snapshot {
     type: time
     timeframes: [raw, date, week, month, quarter, year]
@@ -102,12 +107,8 @@ view: absentee_tiers {
     label: "No. of Student in Tier 4"
     sql: ${tier4_absentee} ;;
   }
-  measure: CAR {
-      type: number
-      value_format_name: "percent_2"
-      sql: CAST((${TABLE}.total_days_enrolled - ${TABLE}.total_days_present)/${TABLE}.total_days_enrolled , 0) ;;
-    }
-  dimension: total_days_enrolled {
+
+ dimension: total_days_enrolled {
     type: number
     sql: ${TABLE}.TOTAL_DAYS_ENROLLED ;;
   }
@@ -115,8 +116,8 @@ view: absentee_tiers {
     type: number
     sql: ${TABLE}.TOTAL_DAYS_PRESENT ;;
   }
-  dimension: total_days_unexcused_absent {
-    type: number
+  measure: total_days_unexcused_absent {
+    type: sum
     sql: ${TABLE}.TOTAL_DAYS_UNEXCUSED_ABSENT ;;
   }
   dimension: id {
