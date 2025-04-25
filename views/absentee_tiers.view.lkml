@@ -102,6 +102,11 @@ view: absentee_tiers {
     label: "No. of Student in Tier 4"
     sql: ${tier4_absentee} ;;
   }
+  measure: CAR {
+      type: number
+      value_format_name: "percent_2"
+      sql: CAST((${TABLE}.total_days_enrolled - ${TABLE}.total_days_present)/${TABLE}.total_days_enrolled , 0) ;;
+    }
   dimension: total_days_enrolled {
     type: number
     sql: ${TABLE}.TOTAL_DAYS_ENROLLED ;;

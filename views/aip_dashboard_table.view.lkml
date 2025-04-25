@@ -12,8 +12,8 @@ dimension: composite_id {
     type: string
     sql: ${TABLE}.MapDistrictName ;;
     view_label:" "
-  #  map_layer_name: school_districts
-  #  html: <p style="color: Yellow; font-size: 100%">{{ value }}</p> ;;
+  #map_layer_name: school_districts
+  #html: <p style="color: Yellow; font-size: 100%">{{ value }}</p> ;;
     label: "District Name"
 }
   dimension: SubpopTypeName {}
