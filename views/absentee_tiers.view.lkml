@@ -7,8 +7,8 @@ view: absentee_tiers {
     sql: ${TABLE}.CURR_GRADE_ORD ;;
   }
   dimension: district_code {
-    type: string
-    sql: ${TABLE}.DISTRICT_CODE ;;
+    type: number
+    sql: ${TABLE}.DISTRICT_CODE;;
   }
   dimension: district_name {
     type: string
@@ -31,8 +31,8 @@ view: absentee_tiers {
     sql: ${TABLE}.HISPANIC_IND ;;
   }
   dimension: location_id {
-    type: string
-    sql: ${TABLE}.LOCATION_ID ;;
+    type: number
+    sql: CAST(${TABLE}.LOCATION_ID AS INT);;
   }
   dimension: school_name {
     type: string
@@ -107,13 +107,36 @@ view: absentee_tiers {
     label: "No. of Student in Tier 4"
     sql: ${tier4_absentee} ;;
   }
-
- dimension: total_days_enrolled {
+  measure: Percent_Tier1 {
     type: number
+    value_format_name: "percent_2"
+    label: "Percent of Tier1"
+    sql:  ${absentee_tiers.tier1_absent_student}/${absentee_tiers.total_days_enrolled} ;;
+  }
+  measure: Percent_Tier2 {
+    type: number
+    value_format_name: "percent_2"
+    label: "Percent of Tier2"
+    sql:  ${absentee_tiers.tier2_absent_student}/${absentee_tiers.total_days_enrolled} ;;
+  }
+  measure: Percent_Tier3 {
+    type: number
+    value_format_name: "percent_2"
+    label: "Percent of Tier3"
+    sql:  ${absentee_tiers.tier3_absent_student}/${absentee_tiers.total_days_enrolled} ;;
+  }
+  measure: Percent_Tier4 {
+    type: number
+    value_format_name: "percent_2"
+    label: "Percent of Tier4"
+    sql:  ${absentee_tiers.tier4_absent_student}/${absentee_tiers.total_days_enrolled} ;;
+  }
+ measure: total_days_enrolled {
+    type: sum
     sql: ${TABLE}.TOTAL_DAYS_ENROLLED ;;
   }
-  dimension: total_days_present {
-    type: number
+ measure: total_days_present {
+    type: sum
     sql: ${TABLE}.TOTAL_DAYS_PRESENT ;;
   }
   measure: total_days_unexcused_absent {
