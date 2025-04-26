@@ -111,25 +111,44 @@ view: absentee_tiers {
     type: number
     value_format_name: "percent_2"
     label: "Percent of Tier1"
-    sql:  ${absentee_tiers.tier1_absent_student}/${absentee_tiers.total_days_enrolled} ;;
+    sql:
+    CASE
+      WHEN ${absentee_tiers.total_days_enrolled} = 0 THEN 0
+      ELSE ${absentee_tiers.tier1_absent_student} * 1.0 / ${absentee_tiers.total_days_enrolled}
+    END ;;
   }
+
   measure: Percent_Tier2 {
     type: number
     value_format_name: "percent_2"
     label: "Percent of Tier2"
-    sql:  ${absentee_tiers.tier2_absent_student}/${absentee_tiers.total_days_enrolled} ;;
+    sql:
+    CASE
+      WHEN ${absentee_tiers.total_days_enrolled} = 0 THEN 0
+      ELSE ${absentee_tiers.tier2_absent_student} * 1.0 / ${absentee_tiers.total_days_enrolled}
+    END ;;
   }
+
   measure: Percent_Tier3 {
     type: number
     value_format_name: "percent_2"
     label: "Percent of Tier3"
-    sql:  ${absentee_tiers.tier3_absent_student}/${absentee_tiers.total_days_enrolled} ;;
+    sql:
+    CASE
+      WHEN ${absentee_tiers.total_days_enrolled} = 0 THEN 0
+      ELSE ${absentee_tiers.tier3_absent_student} * 1.0 / ${absentee_tiers.total_days_enrolled}
+    END ;;
   }
+
   measure: Percent_Tier4 {
     type: number
     value_format_name: "percent_2"
     label: "Percent of Tier4"
-    sql:  ${absentee_tiers.tier4_absent_student}/${absentee_tiers.total_days_enrolled} ;;
+    sql:
+    CASE
+      WHEN ${absentee_tiers.total_days_enrolled} = 0 THEN 0
+      ELSE ${absentee_tiers.tier4_absent_student} * 1.0 / ${absentee_tiers.total_days_enrolled}
+    END ;;
   }
  measure: total_days_enrolled {
     type: sum
