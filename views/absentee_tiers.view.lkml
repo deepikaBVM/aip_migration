@@ -26,7 +26,7 @@ view: absentee_tiers {
     type: string
     sql: ${TABLE}.ETHNIC_CODE ;;
   }
-  dimension: unified_demographic_code {
+  dimension: Subpop_code {
     type: string
     sql:
     CASE
@@ -48,7 +48,7 @@ view: absentee_tiers {
     END ;;
   }
 
-  dimension: unified_demographic_display {
+  dimension: Subpop_label {
     type: string
     sql:
     CASE

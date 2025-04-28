@@ -26,9 +26,13 @@ explore: absentee_tiers {
       join: grade_types{
          type: left_outer
         sql_on: ${absentee_tiers.GRADEITEMCODE_EDIT} = ${grade_types.grade_item_code};;
+        relationship: one_to_many}
+      join: tbl_starsschool_sub_pop_data{
+        type:  left_outer
+        sql_on: ${absentee_tiers.Subpop_code} = ${tbl_starsschool_sub_pop_data.sub_pop_item_code} ;;
         relationship: one_to_many
+      }
     }
-}
 
 explore: aip_dashboard_r1 {}
 persist_with: aip_migration_default_datagroup
