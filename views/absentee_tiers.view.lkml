@@ -26,6 +26,49 @@ view: absentee_tiers {
     type: string
     sql: ${TABLE}.ETHNIC_CODE ;;
   }
+  dimension: unified_demographic_code {
+    type: string
+    sql:
+    CASE
+      /* Ethnicity mappings */
+      WHEN ${ethnic_code} = 'Hispanic' THEN 'H'
+      WHEN ${ethnic_code} = 'Black or African American' THEN 'B'
+      WHEN ${ethnic_code} = 'Asian' THEN 'A'
+      WHEN ${ethnic_code} = 'Caucasian' THEN 'C'
+      WHEN ${ethnic_code} = 'Multi-Racial' THEN 'MR'
+      WHEN ${ethnic_code} = 'American Indian/Alaskan Native' THEN 'I'
+      WHEN ${ethnic_code} = 'Native Hawaiian or Other Pacific Islander' THEN 'P'
+
+      /* Gender mappings */
+      WHEN ${student_gender} = 'M' THEN 'M'
+      WHEN ${student_gender} = 'F' THEN 'F'
+
+      /* Default case */
+      ELSE 'Other'
+    END ;;
+  }
+
+  dimension: unified_demographic_display {
+    type: string
+    sql:
+    CASE
+      /* Ethnicity displays */
+      WHEN ${ethnic_code} = 'Hispanic' THEN 'Hispanic'
+      WHEN ${ethnic_code} = 'Black or African American' THEN 'Black/African American'
+      WHEN ${ethnic_code} = 'Asian' THEN 'Asian'
+      WHEN ${ethnic_code} = 'Caucasian' THEN 'White'
+      WHEN ${ethnic_code} = 'Multi-Racial' THEN 'Multi-Racial'
+      WHEN ${ethnic_code} = 'American Indian/Alaskan Native' THEN 'Native American'
+      WHEN ${ethnic_code} = 'Native Hawaiian or Other Pacific Islander' THEN 'Pacific Islander'
+
+      /* Gender displays */
+      WHEN ${student_gender} = 'M' THEN 'Male'
+      WHEN ${student_gender} = 'F' THEN 'Female'
+
+      /* Default case */
+      ELSE 'Other'
+    END ;;
+  }
   dimension: hispanic_ind {
     type: string
     sql: ${TABLE}.HISPANIC_IND ;;
