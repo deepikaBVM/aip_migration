@@ -67,6 +67,20 @@ view: absentee_tiers {
     type: string
     sql: ${TABLE}.STUDENT_GRADE_LEVEL ;;
   }
+  dimension: GRADEITEMCODE_EDIT {
+    type: string
+    sql:
+    CASE
+      WHEN ${TABLE}.STUDENT_GRADE_LEVEL = 'PK' THEN 'KT'
+      WHEN ${TABLE}.STUDENT_GRADE_LEVEL = 'KF' THEN 'KT'
+      WHEN ${TABLE}.STUDENT_GRADE_LEVEL = '1' THEN '1ST'
+      WHEN ${TABLE}.STUDENT_GRADE_LEVEL = '2' THEN '2ND'
+      WHEN ${TABLE}.STUDENT_GRADE_LEVEL = '3' THEN '3RD'
+      WHEN REGEXP_CONTAINS(${TABLE}.STUDENT_GRADE_LEVEL, '^[4-9]$|^1[0-2]$')
+        THEN CONCAT(${TABLE}.STUDENT_GRADE_LEVEL, 'TH')
+      ELSE 'ALL'
+    END ;;
+  }
   dimension: student_id {
     type: string
     sql: ${TABLE}.STUDENT_ID ;;

@@ -25,7 +25,7 @@ explore: absentee_tiers {
       relationship: one_to_many}
       join: grade_types{
          type: left_outer
-        sql_on: ${absentee_tiers.curr_grade_ord} = ${grade_types.grade_item_code};;
+        sql_on: ${absentee_tiers.GRADEITEMCODE_EDIT} = ${grade_types.grade_item_code};;
         relationship: one_to_many
     }
 }

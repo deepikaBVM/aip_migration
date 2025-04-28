@@ -30,7 +30,7 @@ view: aip_dashboard_r1 {
     sql: CAST(${TABLE}.GradeCurrentYearOAR AS INT) ;;
   }
   measure: grade_enroll_number {
-    type: number
+    type: sum
     sql: CAST(${TABLE}.GradeEnrollNumber AS INT) ;;
   }
   measure: grade_enroll_number_cr {
