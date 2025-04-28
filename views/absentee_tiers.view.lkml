@@ -68,6 +68,7 @@ view: absentee_tiers {
     sql: ${TABLE}.STUDENT_GRADE_LEVEL ;;
   }
   dimension: GRADEITEMCODE_EDIT {
+
     type: string
     sql:
     CASE
@@ -76,7 +77,7 @@ view: absentee_tiers {
       WHEN ${TABLE}.STUDENT_GRADE_LEVEL = '1' THEN '1ST'
       WHEN ${TABLE}.STUDENT_GRADE_LEVEL = '2' THEN '2ND'
       WHEN ${TABLE}.STUDENT_GRADE_LEVEL = '3' THEN '3RD'
-      WHEN REGEXP_CONTAINS(${TABLE}.STUDENT_GRADE_LEVEL, '^[4-9]$|^1[0-2]$')
+      WHEN REGEXP_CONTAINS(${TABLE}.STUDENT_GRADE_LEVEL, r'^[4-9]$|^1[0-2]$')
         THEN CONCAT(${TABLE}.STUDENT_GRADE_LEVEL, 'TH')
       ELSE 'ALL'
     END ;;
