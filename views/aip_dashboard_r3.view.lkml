@@ -1,12 +1,13 @@
 view: aip_dashboard_r3 {
   sql_table_name: dbo.AIP_Dashboard_R3 ;;
 
-  dimension: car {
+  measure: car {
     type: number
-    sql: CAST(${TABLE}.CAR AS FLOAT) ;;
+    value_format_name: "percent_2"
+    sql: ${TABLE}.CAR ;;
   }
-  dimension: current_year_cas {
-    type: number
+  measure: current_year_cas {
+    type: sum
     sql: CAST(${TABLE}.CurrentYearCAS AS INT) ;;
   }
   dimension: district_code {
@@ -18,14 +19,31 @@ view: aip_dashboard_r3 {
     sql: ${TABLE}.DistrictName ;;
   }
   measure: enroll_number {
-    type: number
-    sql: CAST(${TABLE}.enroll_number AS INT) ;;
+    type: sum
+    sql: CAST(${TABLE}.EnrollNumber AS INT) ;;
   }
-  dimension: grade_level {
-    type: string
-    sql: ${TABLE}.GradeLevel ;;
-  }
+dimension: grade_item_code {
 
+  type: string
+  sql:
+    CASE ${TABLE}.GradeLevel
+      WHEN '1' THEN '1ST'
+      WHEN '2' THEN '2ND'
+      WHEN '3' THEN '3RD'
+      WHEN '4' THEN '4TH'
+      WHEN '5' THEN '5TH'
+      WHEN '6' THEN '6TH'
+      WHEN '7' THEN '7TH'
+      WHEN '8' THEN '8TH'
+      WHEN '9' THEN '9TH'
+      WHEN '10' THEN '10TH'
+      WHEN '11' THEN '11TH'
+      WHEN '12' THEN '12TH'
+      WHEN 'PK' THEN 'PK'
+      WHEN 'KT' THEN 'KT'
+      ELSE ${TABLE}.GradeLevel
+    END ;;
+}
   dimension: grade_level_sort_order {
     type: number
     hidden: no
@@ -110,20 +128,20 @@ view: aip_dashboard_r3 {
     type: number
     sql: TRY_CAST(${TABLE}.Tier4Absentee AS INT) ;;
   }
-  dimension: total_days_enrolled {
-    type: number
+  measure: total_days_enrolled {
+    type: sum
     sql: ${TABLE}.TotalDaysEnrolled ;;
   }
-  dimension: total_days_excused_absence {
-    type: string
+  measure: total_days_excused_absence {
+    type: sum
     sql: ${TABLE}.TotalDaysExcusedAbsence ;;
   }
-  dimension: total_days_present {
-    type: number
+  measure: total_days_present {
+    type: sum
     sql: ${TABLE}.TotalDaysPresent ;;
   }
-  dimension: total_days_unexcused_absence {
-    type: string
+  measure: total_days_unexcused_absence {
+    type: sum
     sql: ${TABLE}.TotalDaysUnexcusedAbsence ;;
   }
   measure: count {
