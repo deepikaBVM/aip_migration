@@ -2,12 +2,12 @@ view: aip_dashboard_r3 {
   sql_table_name: dbo.AIP_Dashboard_R3 ;;
 
   dimension: car {
-    type: string
-    sql: ${TABLE}.CAR ;;
+    type: number
+    sql: CAST(${TABLE}.CAR AS FLOAT) ;;
   }
   dimension: current_year_cas {
-    type: string
-    sql: ${TABLE}.CurrentYearCAS ;;
+    type: number
+    sql: CAST(${TABLE}.CurrentYearCAS AS INT) ;;
   }
   dimension: district_code {
     type: string
@@ -17,14 +17,27 @@ view: aip_dashboard_r3 {
     type: string
     sql: ${TABLE}.DistrictName ;;
   }
-  dimension: enroll_number {
-    type: string
-    sql: ${TABLE}.EnrollNumber ;;
+  measure: enroll_number {
+    type: number
+    sql: CAST(${TABLE}.enroll_number AS INT) ;;
   }
   dimension: grade_level {
     type: string
     sql: ${TABLE}.GradeLevel ;;
   }
+
+  dimension: grade_level_sort_order {
+    type: number
+    hidden: no
+    description: "Grade level sort order"
+    sql: case ${TABLE}.GradeLevel
+              when 'PK' then 1 when 'KT' then 2 when '1ST' then 3
+              when '2ND' then 4 when '3RD' then 5 when '4TH' then 6
+              when '5TH' then 7 when '6TH' then 8 when '7TH' then 9
+              when '8TH' then 10 when '9TH' then 11 when '10TH' then 12
+              when '11TH' then 13 when '12TH' then 14 else 15 end;;
+  }
+
   dimension: location_type {
     type: string
     sql: ${TABLE}.LocationType ;;
@@ -42,41 +55,60 @@ view: aip_dashboard_r3 {
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.STARSSchoolYear ;;
   }
+
+  dimension: school_year {
+    type: string
+    label: "School Year"
+    sql: CAST(YEAR(${TABLE}.STARSSchoolYear)-1 as varchar)+ '-'+ CAST(YEAR(${TABLE}.STARSSchoolYear) as varchar) ;;
+  }
+
   dimension: sub_pop_item_code {
     type: string
     sql: ${TABLE}.SubPopItemCode ;;
   }
   dimension: tier1_absence_rate {
-    type: string
-    sql: ${TABLE}.Tier1AbsenceRate ;;
+
+    type: number
+    value_format_name: "percent_2"
+    sql: TRY_CAST(${TABLE}.Tier1AbsenceRate AS FLOAT) ;;
   }
+
   dimension: tier1_absentee {
-    type: string
-    sql: ${TABLE}.Tier1Absentee ;;
+    type: number
+    sql: TRY_CAST(${TABLE}.Tier1Absentee AS INT) ;;
   }
+
   dimension: tier2_absence_rate {
-    type: string
-    sql: ${TABLE}.Tier2AbsenceRate ;;
+    type: number
+    value_format_name: "percent_2"
+    sql: TRY_CAST(${TABLE}.Tier2AbsenceRate AS FLOAT) ;;
   }
+
   dimension: tier2_absentee {
-    type: string
-    sql: ${TABLE}.Tier2Absentee ;;
+    type: number
+    sql: TRY_CAST(${TABLE}.Tier2Absentee AS INT) ;;
   }
+
   dimension: tier3_absence_rate {
-    type: string
-    sql: ${TABLE}.Tier3AbsenceRate ;;
+    type: number
+    value_format_name: "percent_2"
+    sql: TRY_CAST(${TABLE}.Tier3AbsenceRate AS FLOAT) ;;
   }
+
   dimension: tier3_absentee {
-    type: string
-    sql: ${TABLE}.Tier3Absentee ;;
+    type: number
+    sql: TRY_CAST(${TABLE}.Tier3Absentee AS INT) ;;
   }
+
   dimension: tier4_absence_rate {
-    type: string
-    sql: ${TABLE}.Tier4AbsenceRate ;;
+    type: number
+    value_format_name: "percent_2"
+    sql: TRY_CAST(${TABLE}.Tier4AbsenceRate AS FLOAT) ;;
   }
+
   dimension: tier4_absentee {
-    type: string
-    sql: ${TABLE}.Tier4Absentee ;;
+    type: number
+    sql: TRY_CAST(${TABLE}.Tier4Absentee AS INT) ;;
   }
   dimension: total_days_enrolled {
     type: number
