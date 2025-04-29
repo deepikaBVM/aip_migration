@@ -171,8 +171,8 @@ view: absentee_tiers {
     sql:
     CASE
       WHEN ${absentee_tiers.total_days_enrolled} = 0 THEN 0
-      ELSE ${absentee_tiers.tier1_absent_student} * 1.0 / ${absentee_tiers.total_days_enrolled}
-    END ;;
+      ELSE ${absentee_tiers.tier1_absent_student} * 100.0 / ${absentee_tiers.total_days_enrolled}
+      END;;
   }
 
   measure: Percent_Tier2 {
@@ -182,8 +182,8 @@ view: absentee_tiers {
     sql:
     CASE
       WHEN ${absentee_tiers.total_days_enrolled} = 0 THEN 0
-      ELSE ${absentee_tiers.tier2_absent_student} * 1.0 / ${absentee_tiers.total_days_enrolled}
-    END ;;
+      ELSE ${absentee_tiers.tier2_absent_student} * 100.0 / ${absentee_tiers.total_days_enrolled}
+      END;;
   }
 
   measure: Percent_Tier3 {
@@ -193,8 +193,8 @@ view: absentee_tiers {
     sql:
     CASE
       WHEN ${absentee_tiers.total_days_enrolled} = 0 THEN 0
-      ELSE ${absentee_tiers.tier3_absent_student} * 1.0 / ${absentee_tiers.total_days_enrolled}
-    END ;;
+      ELSE ${absentee_tiers.tier3_absent_student} * 100.0 / ${absentee_tiers.total_days_enrolled}
+      END ;;
   }
 
   measure: Percent_Tier4 {
@@ -204,8 +204,8 @@ view: absentee_tiers {
     sql:
     CASE
       WHEN ${absentee_tiers.total_days_enrolled} = 0 THEN 0
-      ELSE ${absentee_tiers.tier4_absent_student} * 1.0 / ${absentee_tiers.total_days_enrolled}
-    END ;;
+      ELSE ${absentee_tiers.tier4_absent_student} * 100.0 / ${absentee_tiers.total_days_enrolled}
+      END ;;
   }
  measure: total_days_enrolled {
     type: sum
