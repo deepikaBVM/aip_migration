@@ -130,19 +130,19 @@ dimension: grade_item_code {
   }
   measure: total_days_enrolled {
     type: sum
-    sql: ${TABLE}.TotalDaysEnrolled ;;
+    sql: CAST(${TABLE}.TotalDaysEnrolled as INT) ;;
   }
   measure: total_days_excused_absence {
     type: sum
-    sql: ${TABLE}.TotalDaysExcusedAbsence ;;
+    sql: CAST(${TABLE}.TotalDaysExcusedAbsence as INT) ;;
   }
   measure: total_days_present {
     type: sum
-    sql: ${TABLE}.TotalDaysPresent ;;
+    sql: CAST(${TABLE}.TotalDaysPresent as INT) ;;
   }
   measure: total_days_unexcused_absence {
     type: sum
-    sql: ${TABLE}.TotalDaysUnexcusedAbsence ;;
+    sql: CAST({TABLE}.TotalDaysUnexcusedAbsence as INT) ;;
   }
   measure: count {
     type: count
