@@ -58,7 +58,7 @@ explore: answers_history {
     relationship: many_to_one
   }
 }
-
+explore: aip_dashboard_r3 {}
 explore: attendance_team {}
 
 explore: district_plan_contact {}
