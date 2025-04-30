@@ -1,6 +1,15 @@
 view: aip_dashboard_r3 {
   sql_table_name: dbo.AIP_Dashboard_R3 ;;
 
+  dimension: map_district_name {
+    type: string
+    sql: ${TABLE}.map_district_name ;;
+    view_label:" "
+    map_layer_name: school_districts
+    html: <p style="color: Yellow; font-size: 100%">{{ value }}</p> ;;
+    label: "District Name"
+  }
+
   measure: car {
     type: number
     value_format_name: "percent_2"
@@ -142,7 +151,7 @@ dimension: grade_item_code {
   }
   measure: total_days_unexcused_absence {
     type: sum
-    sql: CAST({TABLE}.TotalDaysUnexcusedAbsence as INT) ;;
+    sql: CAST(${TABLE}.TotalDaysUnexcusedAbsence as INT) ;;
   }
   measure: count {
     type: count
