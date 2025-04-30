@@ -19,5 +19,22 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 #   }
 # }
 
-explore:  plans{}
-explore: answers {}
+explore:  plans{
+  join: schools {
+    type: left_outer
+    sql_on: ${plans.school_id} = ${plans.id} ;;
+    relationship: one_to_many
+  }
+}
+
+explore: school_districts {}
+
+explore: schools {}
+
+explore: answers {
+  join: plans {
+    type: left_outer
+    sql_on: ${answers.plan_id} = ${plans.id} ;;
+    relationship: one_to_many}
+
+}
