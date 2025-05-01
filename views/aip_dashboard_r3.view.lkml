@@ -93,47 +93,47 @@ dimension: grade_item_code {
     type: string
     sql: ${TABLE}.SubPopItemCode ;;
   }
-  dimension: tier1_absence_rate {
+  measure: tier1_absence_rate {
 
     type: number
     value_format_name: "percent_2"
     sql: TRY_CAST(${TABLE}.Tier1AbsenceRate AS FLOAT) ;;
   }
 
-  dimension: tier1_absentee {
+  measure: tier1_absentee {
     type: number
     sql: TRY_CAST(${TABLE}.Tier1Absentee AS INT) ;;
   }
 
-  dimension: tier2_absence_rate {
+  measure: tier2_absence_rate {
     type: number
     value_format_name: "percent_2"
     sql: TRY_CAST(${TABLE}.Tier2AbsenceRate AS FLOAT) ;;
   }
 
-  dimension: tier2_absentee {
+  measure: tier2_absentee {
     type: number
     sql: TRY_CAST(${TABLE}.Tier2Absentee AS INT) ;;
   }
 
-  dimension: tier3_absence_rate {
+  measure: tier3_absence_rate {
     type: number
     value_format_name: "percent_2"
     sql: TRY_CAST(${TABLE}.Tier3AbsenceRate AS FLOAT) ;;
   }
 
-  dimension: tier3_absentee {
+  measure: tier3_absentee {
     type: number
     sql: TRY_CAST(${TABLE}.Tier3Absentee AS INT) ;;
   }
 
-  dimension: tier4_absence_rate {
+  measure: tier4_absence_rate {
     type: number
     value_format_name: "percent_2"
     sql: TRY_CAST(${TABLE}.Tier4AbsenceRate AS FLOAT) ;;
   }
 
-  dimension: tier4_absentee {
+  measure: tier4_absentee {
     type: number
     sql: TRY_CAST(${TABLE}.Tier4Absentee AS INT) ;;
   }
