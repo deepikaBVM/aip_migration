@@ -95,47 +95,51 @@ dimension: grade_item_code {
   }
   measure: tier1_absence_rate {
 
-    type: number
+    type: average
     value_format_name: "percent_2"
     sql: TRY_CAST(${TABLE}.Tier1AbsenceRate AS FLOAT) ;;
   }
 
-  measure: tier1_absentee {
-    type: number
-    sql: TRY_CAST(${TABLE}.Tier1Absentee AS INT) ;;
+  measure: tier1_absent_student {
+    type: sum
+    label: "No. of Student in Tier 1"
+    sql: ${TABLE}.EnrollNumber -  ${TABLE}.Tier2Absentee - ${TABLE}.Tier3Absentee - ${TABLE}.Tier4Absentee;;
   }
 
   measure: tier2_absence_rate {
-    type: number
+    type: average
     value_format_name: "percent_2"
     sql: TRY_CAST(${TABLE}.Tier2AbsenceRate AS FLOAT) ;;
   }
 
-  measure: tier2_absentee {
-    type: number
-    sql: TRY_CAST(${TABLE}.Tier2Absentee AS INT) ;;
+  measure: tier2_absent_student {
+    type: sum
+    label: "No. of Student in Tier 2"
+    sql: ${TABLE}.Tier2Absentee ;;
   }
 
   measure: tier3_absence_rate {
-    type: number
+    type: average
     value_format_name: "percent_2"
     sql: TRY_CAST(${TABLE}.Tier3AbsenceRate AS FLOAT) ;;
   }
 
-  measure: tier3_absentee {
-    type: number
-    sql: TRY_CAST(${TABLE}.Tier3Absentee AS INT) ;;
+  measure: tier3_absent_student {
+    type: sum
+    label: "No. of Student in Tier 3"
+    sql: ${TABLE}.Tier3Absentee ;;
   }
 
   measure: tier4_absence_rate {
-    type: number
+    type: average
     value_format_name: "percent_2"
     sql: TRY_CAST(${TABLE}.Tier4AbsenceRate AS FLOAT) ;;
   }
 
-  measure: tier4_absentee {
-    type: number
-    sql: TRY_CAST(${TABLE}.Tier4Absentee AS INT) ;;
+  measure: tier4_absent_student {
+    type: sum
+    label: "No. of Student in Tier 4"
+    sql: ${TABLE}.Tier4Absentee ;;
   }
   measure: total_days_enrolled {
     type: sum
