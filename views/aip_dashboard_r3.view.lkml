@@ -31,6 +31,53 @@ view: aip_dashboard_r3 {
     type: sum
     sql: CAST(${TABLE}.EnrollNumber AS INT) ;;
   }
+  dimension: sub_pop_item_code {
+    type: string
+    sql: ${TABLE}.SubPopItemCode ;;
+  }
+  dimension: sub_pop_item_sort {
+    type: number
+    label: "Subpopulation Item Sort"
+
+    sql:  case when ${sub_pop_item_code} = 'F' then 1
+               when ${sub_pop_item_code} = 'M' then 2
+               when ${sub_pop_item_code} = 'H' then 3
+               when ${sub_pop_item_code} = 'I' then 4
+               when ${sub_pop_item_code} = 'A' then 5
+               when ${sub_pop_item_code} = 'B' then 6
+               when ${sub_pop_item_code} = 'C' then 7
+               when ${sub_pop_item_code} = 'P' then 8
+               when ${sub_pop_item_code} = 'NH' then 9
+               when ${sub_pop_item_code} = 'ED' then 10
+               when ${sub_pop_item_code} = 'SD' then 11
+               when ${sub_pop_item_code} = 'EL' then 12
+               when ${sub_pop_item_code} = 'Homeless' then 13
+               when ${sub_pop_item_code} = 'Not Homeless' then 14
+               else 0 end
+              ;;
+  }
+
+  dimension: sub_pop_item {
+    type: string
+    label: "Subpopulation Item"
+    order_by_field: sub_pop_item_sort
+    sql:  case when ${sub_pop_item_code} = 'F' then 'Female'
+               when ${sub_pop_item_code} = 'M' then 'Male'
+               when ${sub_pop_item_code} = 'ED' then 'Economically Disadvantaged'
+               when ${sub_pop_item_code} = 'H' then 'Hispanic'
+               when ${sub_pop_item_code} = 'A' then 'Asian'
+               when ${sub_pop_item_code} = 'C' then 'Caucasian'
+               when ${sub_pop_item_code} = 'B' then 'Black  or African American'
+               when ${sub_pop_item_code} = 'I' then 'American Indian/Alaskan Native'
+               when ${sub_pop_item_code} = 'P' then 'Native Hawaiian or Other Pacific Islander'
+               when ${sub_pop_item_code} = 'SD' then 'Students with Disabilities'
+               when ${sub_pop_item_code} = 'EL' then 'English Language Learners'
+               when ${sub_pop_item_code} = 'NH' then 'Not Hispanic'
+               when ${sub_pop_item_code} = 'Homeless' then 'Experiencing Housing Insecurity'
+               when ${sub_pop_item_code} = 'Not Homeless' then 'Housed'
+               else '' end
+              ;;
+  }
 dimension: grade_item_code {
 
   type: string
@@ -89,12 +136,8 @@ dimension: grade_item_code {
     sql: CAST(YEAR(${TABLE}.STARSSchoolYear)-1 as varchar)+ '-'+ CAST(YEAR(${TABLE}.STARSSchoolYear) as varchar) ;;
   }
 
-  dimension: sub_pop_item_code {
-    type: string
-    sql: ${TABLE}.SubPopItemCode ;;
-  }
   measure: tier1_absence_rate {
-
+    label: "Percent of Student in Tier 1"
     type: average
     value_format_name: "percent_2"
     sql: TRY_CAST(${TABLE}.Tier1AbsenceRate AS FLOAT) ;;
@@ -108,6 +151,7 @@ dimension: grade_item_code {
 
   measure: tier2_absence_rate {
     type: average
+    label: "Percent of Student in Tier 2"
     value_format_name: "percent_2"
     sql: TRY_CAST(${TABLE}.Tier2AbsenceRate AS FLOAT) ;;
   }
@@ -121,6 +165,7 @@ dimension: grade_item_code {
   measure: tier3_absence_rate {
     type: average
     value_format_name: "percent_2"
+    label: "Percent of Student in Tier 3"
     sql: TRY_CAST(${TABLE}.Tier3AbsenceRate AS FLOAT) ;;
   }
 
@@ -133,6 +178,7 @@ dimension: grade_item_code {
   measure: tier4_absence_rate {
     type: average
     value_format_name: "percent_2"
+    label: "Percent of Student in Tier 4"
     sql: TRY_CAST(${TABLE}.Tier4AbsenceRate AS FLOAT) ;;
   }
 
@@ -156,6 +202,16 @@ dimension: grade_item_code {
   measure: total_days_unexcused_absence {
     type: average
     sql: CAST(${TABLE}.TotalDaysUnexcusedAbsence as INT) ;;
+  }
+  measure: avg_days_unexcused_absence {
+    type: average
+    label: "Average Days Unexcused Absence"
+    sql: ${TABLE}.TotalDaysUnexcusedAbsence ;;
+  }
+  measure: avg_days_excused_absence {
+    type: average
+    label: "Average Excused Absences"
+    sql: ${TABLE}.TotalDaysExcusedAbsence ;;
   }
   measure: count {
     type: count
