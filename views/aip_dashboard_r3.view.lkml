@@ -142,7 +142,7 @@ dimension: grade_item_code {
     sql: CAST(${TABLE}.TotalDaysEnrolled as INT) ;;
   }
   measure: total_days_excused_absence {
-    type: sum
+    type: average
     sql: CAST(${TABLE}.TotalDaysExcusedAbsence as INT) ;;
   }
   measure: total_days_present {
@@ -150,7 +150,7 @@ dimension: grade_item_code {
     sql: CAST(${TABLE}.TotalDaysPresent as INT) ;;
   }
   measure: total_days_unexcused_absence {
-    type: sum
+    type: average
     sql: CAST(${TABLE}.TotalDaysUnexcusedAbsence as INT) ;;
   }
   measure: count {
