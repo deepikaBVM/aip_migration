@@ -97,6 +97,18 @@ dimension: grade_item_code {
       WHEN '12' THEN '12TH'
       WHEN 'PK' THEN 'PK'
       WHEN 'KT' THEN 'KT'
+      WHEN '01' THEN '1ST'
+      WHEN '02' THEN '2ND'
+      WHEN '03' THEN '3RD'
+      WHEN '04' THEN '4TH'
+      WHEN '05' THEN '5TH'
+      WHEN '06' THEN '6TH'
+      WHEN '07' THEN '7TH'
+      WHEN '08' THEN '8TH'
+      WHEN '09' THEN '9TH'
+      WHEN '10' THEN '10TH'
+      WHEN '11' THEN '11TH'
+      WHEN '12' THEN '12TH'
       ELSE ${TABLE}.GradeLevel
     END ;;
 }
@@ -146,7 +158,7 @@ dimension: grade_item_code {
   measure: tier1_absent_student {
     type: sum
     label: "No. of Student in Tier 1"
-    sql: ${TABLE}.EnrollNumber -  ${TABLE}.Tier2Absentee - ${TABLE}.Tier3Absentee - ${TABLE}.Tier4Absentee;;
+    sql: CAST(${TABLE}.EnrollNumber as INT) -  CAST(${TABLE}.Tier2Absentee as INT) - CAST(${TABLE}.Tier3Absentee as INT) - CAST(${TABLE}.Tier4Absentee as INT);;
   }
 
   measure: tier2_absence_rate {
@@ -159,7 +171,7 @@ dimension: grade_item_code {
   measure: tier2_absent_student {
     type: sum
     label: "No. of Student in Tier 2"
-    sql: ${TABLE}.Tier2Absentee ;;
+    sql: CAST(${TABLE}.Tier2Absentee as INT);;
   }
 
   measure: tier3_absence_rate {
@@ -172,7 +184,7 @@ dimension: grade_item_code {
   measure: tier3_absent_student {
     type: sum
     label: "No. of Student in Tier 3"
-    sql: ${TABLE}.Tier3Absentee ;;
+    sql: CAST(${TABLE}.Tier3Absentee as INT) ;;
   }
 
   measure: tier4_absence_rate {
@@ -185,7 +197,7 @@ dimension: grade_item_code {
   measure: tier4_absent_student {
     type: sum
     label: "No. of Student in Tier 4"
-    sql: ${TABLE}.Tier4Absentee ;;
+    sql: CAST(${TABLE}.Tier4Absentee as INT) ;;
   }
   measure: total_days_enrolled {
     type: sum
