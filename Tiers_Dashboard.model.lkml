@@ -19,6 +19,8 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 #   }
 # }
 
+explore: tiers_dashboard_table {}
+
 explore:  plans{
   join: schools {
     type: left_outer
@@ -36,5 +38,7 @@ explore: answers {
     type: left_outer
     sql_on: ${answers.plan_id} = ${plans.id} ;;
     relationship: one_to_many}
+
+
 
 }
