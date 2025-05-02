@@ -93,56 +93,60 @@ dimension: grade_item_code {
     type: string
     sql: ${TABLE}.SubPopItemCode ;;
   }
-  dimension: tier1_absence_rate {
+  measure: tier1_absence_rate {
 
-    type: number
+    type: average
     value_format_name: "percent_2"
     sql: TRY_CAST(${TABLE}.Tier1AbsenceRate AS FLOAT) ;;
   }
 
-  dimension: tier1_absentee {
-    type: number
-    sql: TRY_CAST(${TABLE}.Tier1Absentee AS INT) ;;
+  measure: tier1_absent_student {
+    type: sum
+    label: "No. of Student in Tier 1"
+    sql: ${TABLE}.EnrollNumber -  ${TABLE}.Tier2Absentee - ${TABLE}.Tier3Absentee - ${TABLE}.Tier4Absentee;;
   }
 
-  dimension: tier2_absence_rate {
-    type: number
+  measure: tier2_absence_rate {
+    type: average
     value_format_name: "percent_2"
     sql: TRY_CAST(${TABLE}.Tier2AbsenceRate AS FLOAT) ;;
   }
 
-  dimension: tier2_absentee {
-    type: number
-    sql: TRY_CAST(${TABLE}.Tier2Absentee AS INT) ;;
+  measure: tier2_absent_student {
+    type: sum
+    label: "No. of Student in Tier 2"
+    sql: ${TABLE}.Tier2Absentee ;;
   }
 
-  dimension: tier3_absence_rate {
-    type: number
+  measure: tier3_absence_rate {
+    type: average
     value_format_name: "percent_2"
     sql: TRY_CAST(${TABLE}.Tier3AbsenceRate AS FLOAT) ;;
   }
 
-  dimension: tier3_absentee {
-    type: number
-    sql: TRY_CAST(${TABLE}.Tier3Absentee AS INT) ;;
+  measure: tier3_absent_student {
+    type: sum
+    label: "No. of Student in Tier 3"
+    sql: ${TABLE}.Tier3Absentee ;;
   }
 
-  dimension: tier4_absence_rate {
-    type: number
+  measure: tier4_absence_rate {
+    type: average
     value_format_name: "percent_2"
     sql: TRY_CAST(${TABLE}.Tier4AbsenceRate AS FLOAT) ;;
   }
 
-  dimension: tier4_absentee {
-    type: number
-    sql: TRY_CAST(${TABLE}.Tier4Absentee AS INT) ;;
+  measure: tier4_absent_student {
+    type: sum
+    label: "No. of Student in Tier 4"
+    sql: ${TABLE}.Tier4Absentee ;;
   }
   measure: total_days_enrolled {
     type: sum
     sql: CAST(${TABLE}.TotalDaysEnrolled as INT) ;;
   }
   measure: total_days_excused_absence {
-    type: sum
+    type: average
     sql: CAST(${TABLE}.TotalDaysExcusedAbsence as INT) ;;
   }
   measure: total_days_present {
@@ -150,7 +154,7 @@ dimension: grade_item_code {
     sql: CAST(${TABLE}.TotalDaysPresent as INT) ;;
   }
   measure: total_days_unexcused_absence {
-    type: sum
+    type: average
     sql: CAST(${TABLE}.TotalDaysUnexcusedAbsence as INT) ;;
   }
   measure: count {
