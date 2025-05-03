@@ -133,7 +133,7 @@ view: tiers_dashboard_table {
   }
   dimension: tier_name {
     type: string
-    sql: ${TABLE}.TierName ;;
+    sql: CASE WHEN ${TABLE}.TierName IS NOT NULL THEN ${TABLE}.TierName ELSE NULL END ;;
   }
   dimension: tier_title {
     type: string
