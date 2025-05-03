@@ -56,7 +56,11 @@ view: tiers_dashboard_table {
   }
   dimension: plan_id {
     type: number
-    sql: ${TABLE}.PlanID ;;
+   sql: CASE WHEN ${TABLE}.PlanID IS NOT NULL THEN ${TABLE}.PlanID ELSE NULL END ;;
+  }
+  measure: plan_count {
+    type: count
+    #sql: ${plan_id} ;;
   }
   dimension: plan_name {
     type: string
