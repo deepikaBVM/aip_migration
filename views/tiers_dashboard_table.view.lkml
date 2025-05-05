@@ -75,6 +75,10 @@ view: tiers_dashboard_table {
     type: number
     sql: ${TABLE}.Plan_Status ;;
   }
+  dimension: ISCertified {
+    type: number
+    sql:  ${TABLE}.IsCertified ;;
+  }
   dimension: planstatus {
     type: string
     sql: ${TABLE}.PlanStatus ;;
@@ -129,7 +133,7 @@ view: tiers_dashboard_table {
   }
   dimension: tier_id {
     type: number
-    sql: ${TABLE}.TierID ;;
+    sql: CASE WHEN ${TABLE}.TierID IS NOT NULL THEN ${TABLE}.TierID ELSE NULL END ;;
   }
   dimension: tier_name {
     type: string
