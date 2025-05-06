@@ -76,8 +76,8 @@ view: tiers_dashboard_table {
     sql: ${TABLE}.Plan_Status ;;
   }
   dimension: IsCertified {
-    type: string
-    sql: COALESCE(${TABLE}.IsCertified, 0)
+    type: number
+    sql: COALESCE(${TABLE}.IsCertified, 0) ;;
   }
 
   dimension: planstatus {
