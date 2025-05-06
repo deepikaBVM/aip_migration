@@ -77,13 +77,14 @@ view: tiers_dashboard_table {
   }
   dimension: IsCertified {
     type: number
-    sql: COALESCE(${TABLE}.IsCertified, 0) ;;
+    sql: ${TABLE}.IsCertified ;;
   }
   dimension: IsCertified_Label {
     type: string
     sql: CASE
-         WHEN COALESCE(${TABLE}.IsCertified, 0) = 1 THEN 'Approved'
-         ELSE 'Not Approved'
+         WHEN ${TABLE}.IsCertified = 1 THEN 'Submitted'
+         WHEN ${TABLE}.IsCertified = 0 THEN 'Plan Created But Not Submitted'
+         ELSE 'No Plan'
        END ;;
     group_label: "Certification"
   }
