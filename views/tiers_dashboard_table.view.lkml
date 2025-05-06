@@ -59,7 +59,7 @@ view: tiers_dashboard_table {
    sql: CASE WHEN ${TABLE}.PlanID IS NOT NULL THEN ${TABLE}.PlanID ELSE NULL END ;;
   }
   measure: plan_count {
-    type: count
+    type: count_distinct
     #sql: ${plan_id} ;;
   }
   dimension: plan_name {
