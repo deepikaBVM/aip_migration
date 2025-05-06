@@ -75,7 +75,7 @@ view: tiers_dashboard_table {
     type: number
     sql: ${TABLE}.Plan_Status ;;
   }
-  dimension: CertificationStatus {
+  dimension: IsCertified {
     type: string
     sql:
     CASE
