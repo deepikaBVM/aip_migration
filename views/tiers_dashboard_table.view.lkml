@@ -119,6 +119,10 @@ view: tiers_dashboard_table {
     type: number
     sql: ${TABLE}.StrategyID ;;
   }
+  measure: strategy_id_count {
+    type: count
+    #sql: ${strategy_id} ;;
+  }
   dimension: strategy_name {
     type: string
     sql: ${TABLE}.StrategyName ;;
@@ -151,4 +155,5 @@ view: tiers_dashboard_table {
     type: count
     drill_fields: [school_name, district_name, tier_name, plan_name, strategy_name]
   }
+
 }
