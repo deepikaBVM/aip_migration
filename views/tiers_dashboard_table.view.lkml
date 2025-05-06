@@ -75,9 +75,13 @@ view: tiers_dashboard_table {
     type: number
     sql: ${TABLE}.Plan_Status ;;
   }
-  dimension: IsCertified {
-    type: number
-    sql: COALESCE(${TABLE}.IsCertified, 0) ;;
+  dimension: CertificationStatus {
+    type: string
+    sql:
+    CASE
+      WHEN COALESCE(${TABLE}.IsCertified, 0) = 1 THEN 'Approved'
+      ELSE 'Not Approved'
+    END ;;
   }
 
   dimension: planstatus {
