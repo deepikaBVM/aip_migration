@@ -79,6 +79,14 @@ view: tiers_dashboard_table {
     type: number
     sql: COALESCE(${TABLE}.IsCertified, 0) ;;
   }
+  dimension: IsCertified_Label {
+    type: string
+    sql: CASE
+         WHEN COALESCE(${TABLE}.IsCertified, 0) = 1 THEN 'Approved'
+         ELSE 'Not Approved'
+       END ;;
+    group_label: "Certification"
+  }
 
   dimension: planstatus {
     type: string
