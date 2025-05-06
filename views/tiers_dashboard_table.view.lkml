@@ -60,7 +60,7 @@ view: tiers_dashboard_table {
   }
   measure: plan_count {
     type: count_distinct
-    #sql: ${plan_id} ;;
+    sql: ${plan_id} ;;
   }
   dimension: plan_name {
     type: string
