@@ -94,8 +94,8 @@ view: tiers_dashboard_table {
     CASE
       WHEN ${TABLE}.IsCertified = 1 THEN ${plan_id}
       WHEN ${TABLE}.IsCertified = 0 THEN ${plan_id}
-      WHEN ${TABLE}.IsCertified IS NULL THEN ${plan_id}  -- Use plan_id for null case as well
-      ELSE ${plan_id}
+      WHEN ${TABLE}.IsCertified IS NULL THEN ${school_id}
+    ELSE ${school_id}
     END ;;
   }
   measure: Plan_Status_Trend {
