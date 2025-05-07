@@ -94,9 +94,19 @@ view: tiers_dashboard_table {
     CASE
       WHEN ${TABLE}.IsCertified = 1 THEN ${plan_id}
       WHEN ${TABLE}.IsCertified = 0 THEN ${plan_id}
-      WHEN ${plan_id} IS NULL THEN ${school_id}
+      WHEN ${TABLE}.IsCertified IS NULL THEN ${school_id}
     END ;;
   }
+  measure: Plan_Status_Trend {
+    type: count_distinct
+    sql:
+    CASE
+      WHEN ${TABLE}.IsCertified = 1 THEN ${school_id}
+      WHEN ${TABLE}.IsCertified = 0 THEN ${school_id}
+      WHEN ${TABLE}.IsCertified IS NULL THEN ${school_id}
+    END ;;
+  }
+
 
 
   dimension: planstatus {
