@@ -107,8 +107,6 @@ view: tiers_dashboard_table {
     END ;;
   }
 
-
-
   dimension: planstatus {
     type: string
     sql: ${TABLE}.PlanStatus ;;
