@@ -91,13 +91,14 @@ view: tiers_dashboard_table {
   measure: Plan_Category {
     type: count_distinct
     sql:
-    CASE
-      WHEN ${TABLE}.IsCertified = 1 THEN ${plan_id}
-      WHEN ${TABLE}.IsCertified = 0 THEN ${plan_id}
-      WHEN ${TABLE}.IsCertified IS NULL THEN ${school_id}
-    ELSE ${school_id}
-    END ;;
+      CASE
+        WHEN ${TABLE}.IsCertified = 1 THEN ${plan_id}
+        WHEN ${TABLE}.IsCertified = 0 THEN ${plan_id}
+        WHEN ${TABLE}.IsCertified IS NULL OR ${plan_id} IS NULL THEN ${school_id}
+        ELSE NULL
+      END ;;
   }
+
   measure: Plan_Status_Trend {
     type: count_distinct
     sql:
