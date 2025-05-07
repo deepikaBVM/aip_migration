@@ -21,6 +21,9 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 
 explore: tiers_dashboard_table {}
 
+
+
+
 explore:  plans{
   join: schools {
     type: left_outer
