@@ -42,6 +42,4 @@ explore: answers {
     sql_on: ${answers.plan_id} = ${plans.id} ;;
     relationship: one_to_many}
 
-
-
 }
