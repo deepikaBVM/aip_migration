@@ -84,7 +84,8 @@ view: tiers_dashboard_table {
     sql: CASE
          WHEN ${TABLE}.IsCertified = 1 THEN 'Submitted'
          WHEN ${TABLE}.IsCertified = 0 THEN 'Plan Created But Not Submitted'
-         ELSE 'No Plan'
+         WHEN ${TABLE}.IsCertified IS NULL OR ${plan_id} IS NULL THEN 'No Plan'
+         ELSE NULL
        END ;;
     group_label: "Certification"
   }
@@ -92,9 +93,9 @@ view: tiers_dashboard_table {
     type: count_distinct
     sql:
       CASE
-        WHEN ${TABLE}.IsCertified = 1 THEN ${plan_id}
-        WHEN ${TABLE}.IsCertified = 0 THEN ${plan_id}
-        WHEN ${TABLE}.IsCertified IS NULL OR ${plan_id} IS NULL THEN ${school_id}
+        WHEN ${TABLE}.IsCertified = 1 THEN 'Submitted'
+        WHEN ${TABLE}.IsCertified = 0 THEN 'Plan Created But Not Submitted'
+        WHEN ${TABLE}.IsCertified IS NULL OR ${plan_id} IS NULL THEN 'No Plan'
         ELSE NULL
       END ;;
   }
