@@ -89,8 +89,8 @@ view: tiers_dashboard_table {
        END ;;
     group_label: "Certification"
   }
-  measure: Plan_Category {
-    type: count_distinct
+  dimension: Plan_Category {
+    type: string
     sql:
       CASE
         WHEN ${TABLE}.IsCertified = 1 THEN 'Submitted'
@@ -99,6 +99,9 @@ view: tiers_dashboard_table {
         ELSE NULL
       END ;;
   }
+  measure: PlanCategory {
+    type: count
+    }
   dimension: planstatus {
     type: string
     sql: ${TABLE}.PlanStatus ;;
