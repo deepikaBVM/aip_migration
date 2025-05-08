@@ -93,8 +93,8 @@ view: tiers_dashboard_table {
     type: string
     sql:
       CASE
-        WHEN ${TABLE}.IsCertified = 1 THEN 'Submitted'
-        WHEN ${TABLE}.IsCertified = 0 THEN 'Plan Created But Not Submitted'
+        WHEN ${TABLE}.IsCertified = 1 THEN ${plan_id}='Submitted'
+        WHEN ${TABLE}.IsCertified = 0 THEN ${plan_id}='Plan Created But Not Submitted'
         WHEN ${TABLE}.IsCertified IS NULL OR ${plan_id} IS NULL THEN 'No Plan'
         ELSE NULL
       END ;;
