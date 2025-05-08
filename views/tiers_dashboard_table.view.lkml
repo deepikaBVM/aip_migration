@@ -89,7 +89,7 @@ view: tiers_dashboard_table {
        END ;;
     group_label: "Certification"
   }
-  dimension: Plan_Category {
+  dimension: PlanCategory {
     type: string
     sql:
       CASE
@@ -99,7 +99,7 @@ view: tiers_dashboard_table {
         ELSE NULL
       END ;;
   }
-  measure: PlanCategory {
+  measure: Plan_Category {
     type: count
     }
   dimension: planstatus {
