@@ -108,7 +108,7 @@ view: tiers_dashboard_table {
   }
   measure: count_of_schoolid {
     type: count_distinct
-    sql: ${school_id}ID} ;;
+    sql: ${school_id}} ;;
   }
   dimension: planstatus {
     type: string
