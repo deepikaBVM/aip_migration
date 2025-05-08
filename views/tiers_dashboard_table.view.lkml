@@ -102,6 +102,14 @@ view: tiers_dashboard_table {
   measure: Plan_Category {
     type: count
     }
+  dimension: school_id {
+    type: string
+    sql: ${TABLE}.SchoolID ;;
+  }
+  measure: count_of_schoolid {
+    type: count_distinct
+    sql: ${school_id}ID} ;;
+  }
   dimension: planstatus {
     type: string
     sql: ${TABLE}.PlanStatus ;;
@@ -114,10 +122,7 @@ view: tiers_dashboard_table {
     type: string
     sql: ${TABLE}.SchoolDescription ;;
   }
-  dimension: school_id {
-    type: number
-    sql: ${TABLE}.SchoolID ;;
-  }
+
   dimension: school_name {
     type: string
     sql: ${TABLE}.SchoolName ;;
