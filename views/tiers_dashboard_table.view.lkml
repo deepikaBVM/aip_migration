@@ -103,7 +103,7 @@ view: tiers_dashboard_table {
     type: count
     }
   dimension: school_id {
-    type: string
+    type: number
     sql: ${TABLE}.SchoolID ;;
   }
   measure: count_of_schoolid {
