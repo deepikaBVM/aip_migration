@@ -69,4 +69,30 @@ view: aip_rootcause_dashboard {
     type: count
     drill_fields: [district_name, school_name, root_cause_factor_name, strategy_name]
   }
+  measure: total_schools {
+    type: count_distinct
+    sql: ${TABLE}.school_name ;;
+    label: "Total Schools"
+  }
+
+  measure: engaged_schools {
+    type: count_distinct
+    sql: ${school_name} ;;
+    filters: [answer: "Yes", answer: "No"]
+    label: "Engaged Schools (Any Response)"
+  }
+  measure: not_engaged_schools {
+    type: count_distinct
+    sql: ${school_name} ;;
+    filters: [answer: "NULL"]
+    label: "Not Engaged Schools"
+  }
+  measure: engagement_rate {
+    type: number
+    sql: ${engaged_schools} / NULLIF(${total_schools}, 0) ;;
+    value_format_name: percent_1
+    label: "Engagement Rate"
+  }
+
+
 }
