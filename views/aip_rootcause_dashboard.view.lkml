@@ -76,14 +76,12 @@ view: aip_rootcause_dashboard {
   }
 
   measure: yes_answer {
-    type: count_distinct
-    sql: ${answer} ;;
+    type: count
     filters: [answer: "Yes"]
     label: "Engaged yes answer"
   }
   measure: no_answer {
-    type: count_distinct
-    sql: ${answer} ;;
+    type: count
     filters: [answer: "No"]
     label: "Engaged No answer"
   }
