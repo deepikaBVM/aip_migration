@@ -84,7 +84,7 @@ view: aip_rootcause_dashboard {
   measure: no_answer {
     type: count_distinct
     sql: ${school_name} ;;
-    filters: [answer: "NULL"]
+    filters: [answer: "No"]
     label: "Not Engaged Schools"
   }
 
