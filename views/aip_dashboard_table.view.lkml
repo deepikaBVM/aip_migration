@@ -43,6 +43,13 @@ dimension: composite_id {
     drill_fields: [district_code,district_name, school_code,school_name, CAR]
   }
 
+  measure: CAR_subpop {
+    type: number
+    value_format_name: "percent_2"
+    sql: CAST(${subpop_currect_year_cas} AS FLOAT) / NULLIF(${subpop_enroll_number}, 0) ;;
+    drill_fields: [district_code,district_name, school_code,school_name, CAR]
+  }
+
   dimension: car_tier {
     type: string
     sql:
