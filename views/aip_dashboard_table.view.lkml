@@ -34,6 +34,7 @@ dimension: composite_id {
   measure: grade_current_year_cas {
     type: sum
     sql: CAST(${TABLE}.GradeCurrentYearCAS AS INT);;
+    drill_fields: [district_code,school_code,grade_current_year_cas]
   }
   measure: CAR {
     type: number
