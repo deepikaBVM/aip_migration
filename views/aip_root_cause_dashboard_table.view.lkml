@@ -57,4 +57,34 @@ view: aip_root_cause_dashboard_table {
     type: count
     drill_fields: [district_name, school_name, root_cause_factor_name, strategy_name]
   }
+  measure: yes_count {
+    type: count
+    filters: [answer: "Yes"]
+    label: "Yes Responses"
+  }
+
+  measure: no_count {
+    type: count
+    filters: [answer: "No"]
+    label: "No Responses"
+  }
+
+  measure: total_responses {
+    type: count
+    label: "Total Responses"
+  }
+
+  measure: yes_percentage {
+    type: number
+    sql: ${yes_count} / NULLIF(${total_responses}, 0) ;;
+    value_format_name: percent_1
+    label: "Yes Percentage"
+  }
+
+  measure: no_percentage {
+    type: number
+    sql: ${no_count} / NULLIF(${total_responses}, 0) ;;
+    value_format_name: percent_1
+    label: "No Percentage"
+  }
 }
