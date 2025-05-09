@@ -29,6 +29,7 @@ dimension: composite_id {
   measure: grade_enroll_number {
     type: sum
     sql: CAST(${TABLE}.GradeEnrollNumber AS INT) ;;
+    drill_fields: [district_code,school_code,grade_enroll_number]
   }
   measure: grade_current_year_cas {
     type: sum
@@ -38,6 +39,7 @@ dimension: composite_id {
     type: number
     value_format_name: "percent_2"
     sql: CAST(${grade_current_year_cas} AS FLOAT) / NULLIF(${grade_enroll_number}, 0) ;;
+    drill_fields: [district_code,school_code,CAR]
   }
 
   dimension: car_tier {
