@@ -71,10 +71,15 @@ view: aip_rootcause_dashboard {
   }
   measure: total_schools {
     type: count_distinct
-    sql: ${TABLE}.school_name ;;
+    sql: ${TABLE}.SchoolName ;;
     label: "Total Schools"
   }
-
+  measure: engaged_schools {
+    type: count_distinct
+    sql: ${school_name} ;;
+    filters: [answer: "Yes", answer: "No"]
+    label: "Engaged Schools"
+  }
   measure: yes_answer {
     type: count
     filters: [answer: "Yes"]
