@@ -29,15 +29,25 @@ dimension: composite_id {
   measure: grade_enroll_number {
     type: sum
     sql: CAST(${TABLE}.GradeEnrollNumber AS INT) ;;
+    drill_fields: [district_code,district_name, school_code,school_name,grade_enroll_number]
   }
   measure: grade_current_year_cas {
     type: sum
     sql: CAST(${TABLE}.GradeCurrentYearCAS AS INT);;
+    drill_fields: [district_code,district_name, school_code,school_name,grade_current_year_cas]
   }
   measure: CAR {
     type: number
     value_format_name: "percent_2"
     sql: CAST(${grade_current_year_cas} AS FLOAT) / NULLIF(${grade_enroll_number}, 0) ;;
+    drill_fields: [district_code,district_name, school_code,school_name, CAR]
+  }
+
+  measure: CAR_subpop {
+    type: number
+    value_format_name: "percent_2"
+    sql: CAST(${subpop_currect_year_cas} AS FLOAT) / NULLIF(${subpop_enroll_number}, 0) ;;
+    drill_fields: [district_code,district_name, school_code,school_name, CAR_subpop]
   }
 
   dimension: car_tier {
@@ -111,10 +121,12 @@ dimension: composite_id {
   measure: subpop_currect_year_cas {
     type: sum
     sql:CAST(${TABLE}.SubpopCurrectYearCAS AS INT);;
+    drill_fields: [district_code,district_name, school_code,school_name,subpop_currect_year_cas]
   }
   measure: subpop_enroll_number {
     type: sum
     sql: CAST(${TABLE}.SubpopEnrollNumber AS INT);;
+    drill_fields: [district_code,district_name, school_code,school_name,subpop_enroll_number]
   }
   measure: subpop_prior1_year_cas {
     type: sum
