@@ -47,7 +47,7 @@ dimension: composite_id {
     type: number
     value_format_name: "percent_2"
     sql: CAST(${subpop_currect_year_cas} AS FLOAT) / NULLIF(${subpop_enroll_number}, 0) ;;
-    drill_fields: [district_code,district_name, school_code,school_name, CAR]
+    drill_fields: [district_code,district_name, school_code,school_name, CAR_subpop]
   }
 
   dimension: car_tier {
