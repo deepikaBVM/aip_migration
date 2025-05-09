@@ -19,6 +19,12 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 #   }
 # }
 
+map_layer: school_districts {
+  file: "/school_district_boundaries.topojson"
+  property_label_key: "name"
+  format: topojson
+}
+
 explore: tiers_dashboard_table {}
 
 
