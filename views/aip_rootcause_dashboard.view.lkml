@@ -1,5 +1,5 @@
-view: aip_root_cause_dashboard_table {
-  sql_table_name: dbo.AIP_RootCause_Dashboard_Table ;;
+view: aip_rootcause_dashboard {
+  sql_table_name: dbo.AIP_ROOTCAUSE_DASHBOARD ;;
 
   dimension: answer {
     type: string
@@ -16,6 +16,10 @@ view: aip_root_cause_dashboard_table {
   dimension: entity_type {
     type: string
     sql: ${TABLE}.EntityType ;;
+  }
+  dimension: is_plan_submitted {
+    type: string
+    sql: ${TABLE}.IsPlanSubmitted ;;
   }
   dimension: plan_id {
     type: number
@@ -41,50 +45,28 @@ view: aip_root_cause_dashboard_table {
     type: string
     sql: ${TABLE}.RootCauseStep ;;
   }
+  dimension: school_district_id {
+    type: number
+    sql: ${TABLE}.SchoolDistrictId ;;
+  }
+  dimension: school_id {
+    type: number
+    sql: ${TABLE}.SchoolID ;;
+  }
   dimension: school_name {
     type: string
     sql: ${TABLE}.SchoolName ;;
+  }
+  dimension: school_year {
+    type: string
+    sql: ${TABLE}.SchoolYear ;;
   }
   dimension: strategy_name {
     type: string
     sql: ${TABLE}.StrategyName ;;
   }
-  dimension: year {
-    type: string
-    sql: ${TABLE}.Year ;;
-  }
   measure: count {
     type: count
     drill_fields: [district_name, school_name, root_cause_factor_name, strategy_name]
-  }
-  measure: yes_count {
-    type: count
-    filters: [answer: "Yes"]
-    label: "Yes Responses"
-  }
-
-  measure: no_count {
-    type: count
-    filters: [answer: "No"]
-    label: "No Responses"
-  }
-
-  measure: total_responses {
-    type: count
-    label: "Total Responses"
-  }
-
-  measure: yes_percentage {
-    type: number
-    sql: ${yes_count} / NULLIF(${total_responses}, 0) ;;
-    value_format_name: percent_1
-    label: "Yes Percentage"
-  }
-
-  measure: no_percentage {
-    type: number
-    sql: ${no_count} / NULLIF(${total_responses}, 0) ;;
-    value_format_name: percent_1
-    label: "No Percentage"
   }
 }
