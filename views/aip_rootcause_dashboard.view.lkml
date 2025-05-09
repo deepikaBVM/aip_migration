@@ -75,23 +75,17 @@ view: aip_rootcause_dashboard {
     label: "Total Schools"
   }
 
-  measure: engaged_schools {
+  measure: yes_answer {
     type: count_distinct
     sql: ${school_name} ;;
-    filters: [answer: "Yes", answer: "No"]
+    filters: [answer: "Yes"]
     label: "Engaged Schools (Any Response)"
   }
-  measure: not_engaged_schools {
+  measure: no_answer {
     type: count_distinct
     sql: ${school_name} ;;
     filters: [answer: "NULL"]
     label: "Not Engaged Schools"
-  }
-  measure: engagement_rate {
-    type: number
-    sql: ${engaged_schools} / NULLIF(${total_schools}, 0) ;;
-    value_format_name: percent_1
-    label: "Engagement Rate"
   }
 
 
