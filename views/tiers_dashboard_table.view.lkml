@@ -13,6 +13,10 @@ view: tiers_dashboard_table {
     type: number
     sql: ${TABLE}.DistrictID ;;
   }
+  measure: count_of_districtid {
+    type: count_distinct
+    sql: ${district_id} ;;
+  }
   dimension: district_name {
     type: string
     sql: ${TABLE}.DistrictName ;;
