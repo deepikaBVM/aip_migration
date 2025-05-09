@@ -77,15 +77,15 @@ view: aip_rootcause_dashboard {
 
   measure: yes_answer {
     type: count_distinct
-    sql: ${school_name} ;;
+    sql: ${answer} ;;
     filters: [answer: "Yes"]
-    label: "Engaged Schools (Any Response)"
+    label: "Engaged yes answer"
   }
   measure: no_answer {
     type: count_distinct
-    sql: ${school_name} ;;
+    sql: ${answer} ;;
     filters: [answer: "No"]
-    label: "Not Engaged Schools"
+    label: "Engaged No answer"
   }
 
 
