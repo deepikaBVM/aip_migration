@@ -114,10 +114,12 @@ dimension: composite_id {
   measure: subpop_currect_year_cas {
     type: sum
     sql:CAST(${TABLE}.SubpopCurrectYearCAS AS INT);;
+    drill_fields: [district_code,district_name, school_code,school_name,subpop_currect_year_cas]
   }
   measure: subpop_enroll_number {
     type: sum
     sql: CAST(${TABLE}.SubpopEnrollNumber AS INT);;
+    drill_fields: [district_code,district_name, school_code,school_name,subpop_enroll_number]
   }
   measure: subpop_prior1_year_cas {
     type: sum
