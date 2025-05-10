@@ -92,7 +92,7 @@ view: aip_rootcause_dashboard {
   }
   measure: schools_per_factor {
     type: count_distinct
-    sql: ${school_name} ;;
+    sql: ${TABLE}.SchoolName  ;;
     label: "Schools with This Factor"
   }
 
