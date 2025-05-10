@@ -90,6 +90,11 @@ view: aip_rootcause_dashboard {
     filters: [answer: "No"]
     label: "Engaged No answer"
   }
+  measure: schools_per_factor {
+    type: count_distinct
+    sql: ${school_name} ;;
+    label: "Schools with This Factor"
+  }
 
 
 }
