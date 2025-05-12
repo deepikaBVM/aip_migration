@@ -164,6 +164,13 @@ dimension: grade_item_code {
     sql: CAST(${TABLE}.EnrollNumber as INT) -  CAST(${TABLE}.Tier2Absentee as INT) - CAST(${TABLE}.Tier3Absentee as INT) - CAST(${TABLE}.Tier4Absentee as INT);;
   }
 
+  measure: Tier1_percentage {
+    type: number
+    value_format_name: "percent_2"
+    sql: CAST(${tier1_absent_student} AS FLOAT) / NULLIF(${enroll_number}, 0) ;;
+    drill_fields: [district_code,district_name, school_code,school_name, Tier1_percentage]
+  }
+
   measure: tier2_absence_rate {
     type: average
     label: "Percent of Student in Tier 2"
@@ -175,6 +182,13 @@ dimension: grade_item_code {
     type: sum
     label: "No. of Student in Tier 2"
     sql: CAST(${TABLE}.Tier2Absentee as INT);;
+  }
+
+  measure: Tier2_percentage {
+    type: number
+    value_format_name: "percent_2"
+    sql: CAST(${tier2_absent_student} AS FLOAT) / NULLIF(${enroll_number}, 0) ;;
+    drill_fields: [district_code,district_name, school_code,school_name, Tier2_percentage]
   }
 
   measure: tier3_absence_rate {
@@ -190,6 +204,13 @@ dimension: grade_item_code {
     sql: CAST(${TABLE}.Tier3Absentee as INT) ;;
   }
 
+  measure: Tier3_percentage {
+    type: number
+    value_format_name: "percent_2"
+    sql: CAST(${tier3_absent_student} AS FLOAT) / NULLIF(${enroll_number}, 0) ;;
+    drill_fields: [district_code,district_name, school_code,school_name, Tier3_percentage]
+  }
+
   measure: tier4_absence_rate {
     type: average
     value_format_name: "percent_2"
@@ -202,6 +223,14 @@ dimension: grade_item_code {
     label: "No. of Student in Tier 4"
     sql: CAST(${TABLE}.Tier4Absentee as INT) ;;
   }
+
+  measure: Tier4_percentage {
+    type: number
+    value_format_name: "percent_2"
+    sql: CAST(${tier4_absent_student} AS FLOAT) / NULLIF(${enroll_number}, 0) ;;
+    drill_fields: [district_code,district_name, school_code,school_name, Tier4_percentage]
+  }
+
   measure: total_days_enrolled {
     type: sum
     sql: CAST(${TABLE}.TotalDaysEnrolled as INT) ;;
