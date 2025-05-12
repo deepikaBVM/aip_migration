@@ -18,6 +18,7 @@ view: aip_dashboard_r3 {
   measure: current_year_cas {
     type: sum
     sql: CAST(${TABLE}.CurrentYearCAS AS INT) ;;
+    drill_fields: [district_code, district_name, school_code, school_name, current_year_cas]
   }
   dimension: district_code {
     type: string
