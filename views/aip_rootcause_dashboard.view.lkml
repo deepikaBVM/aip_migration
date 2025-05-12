@@ -95,6 +95,36 @@ view: aip_rootcause_dashboard {
     sql: ${TABLE}.SchoolName  ;;
     label: "Schools with This Factor"
   }
+# Add these new measures for factor analysis:
 
+  measure: schools_with_factor {
+    type: count_distinct
+    sql:${TABLE}.SchoolName ;;
+    label: "Schools with Factor"
+    description: "Count of distinct schools with each root cause factor"
+  }
+
+  measure: percent_schools_with_factor {
+    type: number
+    sql: ${schools_with_factor} / NULLIF(${total_schools}, 0) ;;
+    value_format_name: percent_1
+    label: "% of Schools with Factor"
+  }
+
+  measure: top_factors {
+    type: string
+    sql:
+    SELECT STRING_AGG(CAST(factor AS VARCHAR(255)), ', ' ORDER BY school_count DESC)
+    FROM (
+      SELECT
+        RootCauseFactorName AS factor,
+        COUNT(DISTINCT SchoolID) AS school_count
+      FROM ${TABLE}
+      GROUP BY RootCauseFactorName
+      ORDER BY school_count DESC
+      LIMIT 3
+    ) AS subquery ;;
+    label: "Top 3 Factors"
+  }
 
 }
