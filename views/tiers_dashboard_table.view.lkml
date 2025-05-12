@@ -183,6 +183,10 @@ view: tiers_dashboard_table {
     type: number
     sql: ${TABLE}.ToYear ;;
   }
+  dimension: postalcode {
+    type: number
+    sql: ${TABLE}.postalcode ;;
+  }
   measure: count {
     type: count
     drill_fields: [school_name, district_name, tier_name, plan_name, strategy_name]
