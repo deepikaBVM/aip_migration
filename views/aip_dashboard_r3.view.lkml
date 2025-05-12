@@ -30,6 +30,7 @@ view: aip_dashboard_r3 {
   measure: enroll_number {
     type: sum
     sql: CAST(${TABLE}.EnrollNumber AS INT) ;;
+    drill_fields: [district_code,district_name, school_code,school_name,enroll_number]
   }
   dimension: sub_pop_item_code {
     type: string
