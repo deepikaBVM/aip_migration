@@ -99,7 +99,7 @@ view: aip_rootcause_dashboard {
 
   measure: schools_with_factor {
     type: count_distinct
-    sql: ${school_id} ;;
+    sql:${TABLE}.SchoolName ;;
     label: "Schools with Factor"
     description: "Count of distinct schools with each root cause factor"
   }
