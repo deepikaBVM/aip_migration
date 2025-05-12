@@ -10,11 +10,12 @@ view: aip_dashboard_r3 {
     label: "District Name"
   }
 
-  measure: car {
-    type: number
-    value_format_name: "percent_2"
-    sql: ${TABLE}.CAR ;;
-  }
+ measure: CAR {
+  type: number
+  value_format_name: "percent_2"
+  sql: CAST(${current_year_cas} AS FLOAT) / NULLIF(${enroll_number}, 0) ;;
+  drill_fields: [district_code,district_name, school_code,school_name, CAR]
+}
   measure: current_year_cas {
     type: sum
     sql: CAST(${TABLE}.CurrentYearCAS AS INT) ;;
