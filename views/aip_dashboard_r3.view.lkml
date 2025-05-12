@@ -14,7 +14,7 @@ view: aip_dashboard_r3 {
   type: number
   value_format_name: "percent_2"
   sql: CAST(${current_year_cas} AS FLOAT) / NULLIF(${enroll_number}, 0) ;;
-  drill_fields: [district_code,district_name, school_code,school_name, CAR]
+  drill_fields: [district_code,district_name, school_code,school_name,grade_item_code, CAR]
 }
   measure: current_year_cas {
     type: sum
