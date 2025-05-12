@@ -184,7 +184,7 @@ view: tiers_dashboard_table {
     sql: ${TABLE}.ToYear ;;
   }
   dimension: postalcode {
-    type: number
+    type: string
     sql: ${TABLE}.postalcode ;;
   }
   measure: count {
