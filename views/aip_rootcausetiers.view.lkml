@@ -97,7 +97,7 @@ view: aip_rootcausetiers {
     type: count
     drill_fields: [detail*]
   }
-  measure: dashboardtype {
+  dimension: dashboardtype {
     type: string
     sql: ${TABLE}.DashboardType ;;
   }
