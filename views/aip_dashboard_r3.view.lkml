@@ -16,11 +16,25 @@ view: aip_dashboard_r3 {
   sql: CAST(${current_year_cas} AS FLOAT) / NULLIF(${enroll_number}, 0) ;;
   drill_fields: [district_code,district_name, school_code,school_name,grade_item_code, CAR]
 }
+  measure: CAR_Subpop {
+    type: number
+    value_format_name: "percent_2"
+    sql: CAST(${current_year_cas} AS FLOAT) / NULLIF(${enroll_number}, 0) ;;
+    drill_fields: [district_code,district_name, school_code,school_name,sub_pop_item, CAR]
+  }
+
   measure: current_year_cas {
     type: sum
     sql: CAST(${TABLE}.CurrentYearCAS AS INT) ;;
     drill_fields: [district_code, district_name, school_code, school_name, current_year_cas]
   }
+
+  measure: subpop_current_year_cas {
+    type: sum
+    sql: CAST(${TABLE}.CurrentYearCAS AS INT) ;;
+    drill_fields: [district_code, district_name, school_code, school_name,sub_pop_item, subpop_current_year_cas]
+  }
+
   dimension: district_code {
     type: string
     sql: ${TABLE}.DistrictCode ;;
@@ -34,6 +48,13 @@ view: aip_dashboard_r3 {
     sql: CAST(${TABLE}.EnrollNumber AS INT) ;;
     drill_fields: [district_code,district_name, school_code,school_name,enroll_number]
   }
+
+  measure: subpop_enroll_number {
+    type: sum
+    sql: CAST(${TABLE}.EnrollNumber AS INT) ;;
+    drill_fields: [district_code,district_name, school_code,school_name,sub_pop_item, subpop_enroll_number]
+  }
+
   dimension: sub_pop_item_code {
     type: string
     sql: ${TABLE}.SubPopItemCode ;;
@@ -162,7 +183,14 @@ dimension: grade_item_code {
     type: sum
     label: "No. of Student in Tier 1"
     sql: CAST(${TABLE}.EnrollNumber as INT) -  CAST(${TABLE}.Tier2Absentee as INT) - CAST(${TABLE}.Tier3Absentee as INT) - CAST(${TABLE}.Tier4Absentee as INT);;
-    drill_fields: [district_code,district_name,school_code,school_name, tier1_absent_student]
+    drill_fields: [district_code,district_name,school_code,school_name, grade_item_code, tier1_absent_student]
+  }
+
+  measure: tier1_absent_student_subpop {
+    type: sum
+    label: "No. of Student in Tier 1"
+    sql: CAST(${TABLE}.EnrollNumber as INT) -  CAST(${TABLE}.Tier2Absentee as INT) - CAST(${TABLE}.Tier3Absentee as INT) - CAST(${TABLE}.Tier4Absentee as INT);;
+    drill_fields: [district_code,district_name,school_code,school_name, sub_pop_item, tier1_absent_student_subpop]
   }
 
   measure: Tier1_percentage {
@@ -183,7 +211,15 @@ dimension: grade_item_code {
     type: sum
     label: "No. of Student in Tier 2"
     sql: CAST(${TABLE}.Tier2Absentee as INT);;
-    drill_fields: [district_code,district_name,school_code,school_name, tier2_absent_student]
+    drill_fields: [district_code,district_name,school_code,school_name,grade_item_code, tier2_absent_student]
+
+  }
+
+  measure: tier2_absent_student_subpop {
+    type: sum
+    label: "No. of Student in Tier 2"
+    sql: CAST(${TABLE}.Tier2Absentee as INT);;
+    drill_fields: [district_code,district_name,school_code,school_name,sub_pop_item, tier2_absent_student]
 
   }
 
@@ -205,7 +241,15 @@ dimension: grade_item_code {
     type: sum
     label: "No. of Student in Tier 3"
     sql: CAST(${TABLE}.Tier3Absentee as INT) ;;
-    drill_fields: [district_code,district_name,school_code,school_name, tier3_absent_student]
+    drill_fields: [district_code,district_name,school_code,school_name,grade_item_code, tier3_absent_student]
+
+  }
+
+  measure: tier3_absent_student_subpop {
+    type: sum
+    label: "No. of Student in Tier 3"
+    sql: CAST(${TABLE}.Tier3Absentee as INT) ;;
+    drill_fields: [district_code,district_name,school_code,school_name,sub_pop_item, tier3_absent_student]
 
   }
 
@@ -227,7 +271,15 @@ dimension: grade_item_code {
     type: sum
     label: "No. of Student in Tier 4"
     sql: CAST(${TABLE}.Tier4Absentee as INT) ;;
-    drill_fields: [district_code,district_name,school_code,school_name, tier4_absent_student]
+    drill_fields: [district_code,district_name,school_code,school_name,grade_item_code, tier4_absent_student]
+
+  }
+
+  measure: tier4_absent_student_subpop {
+    type: sum
+    label: "No. of Student in Tier 4"
+    sql: CAST(${TABLE}.Tier4Absentee as INT) ;;
+    drill_fields: [district_code,district_name,school_code,school_name,sub_pop_item, tier4_absent_student]
 
   }
 
