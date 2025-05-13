@@ -1,5 +1,5 @@
-view: aip_rootcause_dashboard {
-  sql_table_name: dbo.AIP_ROOTCAUSE_DASHBOARD ;;
+view: aip_rootcausetiers {
+  sql_table_name: dbo.AIP_ROOTCAUSETIERS ;;
 
   dimension: answer {
     type: string
@@ -17,6 +17,18 @@ view: aip_rootcause_dashboard {
     type: string
     sql: ${TABLE}.EntityType ;;
   }
+  dimension: entity_type_id {
+    type: number
+    sql: ${TABLE}.EntityTypeId ;;
+  }
+  dimension: from_date {
+    type: number
+    sql: ${TABLE}.FromDate ;;
+  }
+  dimension: implementation_name {
+    type: string
+    sql: ${TABLE}.ImplementationName ;;
+  }
   dimension: is_plan_submitted {
     type: string
     sql: ${TABLE}.IsPlanSubmitted ;;
@@ -31,19 +43,23 @@ view: aip_rootcause_dashboard {
   }
   dimension: root_cause_challenge {
     type: string
-    sql: ${TABLE}.RootCauseChallenge ;;
+    sql: ${TABLE}."Root Cause Challenge" ;;
   }
   dimension: root_cause_factor_name {
     type: string
-    sql: ${TABLE}.RootCauseFactorName ;;
+    sql: ${TABLE}."Root Cause Factor Name" ;;
   }
   dimension: root_cause_factor_title {
     type: string
-    sql: ${TABLE}.RootCauseFactorTitle ;;
+    sql: ${TABLE}."Root Cause Factor Title" ;;
   }
   dimension: root_cause_step {
     type: string
-    sql: ${TABLE}.RootCauseStep ;;
+    sql: ${TABLE}."Root Cause Step" ;;
+  }
+  dimension: root_cause_strategy_name {
+    type: string
+    sql: ${TABLE}."Root Cause Strategy Name" ;;
   }
   dimension: school_district_id {
     type: number
@@ -61,14 +77,27 @@ view: aip_rootcause_dashboard {
     type: string
     sql: ${TABLE}.SchoolYear ;;
   }
+  dimension: sort_answer_id {
+    type: number
+    sql: ${TABLE}.SortAnswerID ;;
+  }
   dimension: strategy_name {
     type: string
     sql: ${TABLE}.StrategyName ;;
   }
+  dimension: tier_name {
+    type: string
+    sql: ${TABLE}.TierName ;;
+  }
+  dimension: to_date {
+    type: number
+    sql: ${TABLE}.ToDate ;;
+  }
   measure: count {
     type: count
-    drill_fields: [district_name, school_name, root_cause_factor_name, strategy_name]
+    drill_fields: [detail*]
   }
+
   measure: total_schools {
     type: count_distinct
     sql: ${TABLE}.SchoolName ;;
@@ -113,5 +142,17 @@ view: aip_rootcause_dashboard {
     label: "% of Schools with Factor"
   }
 
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+  district_name,
+  school_name,
+  tier_name,
+  strategy_name,
+  implementation_name,
+  root_cause_factor_name,
+  root_cause_strategy_name
+  ]
+  }
 
 }
