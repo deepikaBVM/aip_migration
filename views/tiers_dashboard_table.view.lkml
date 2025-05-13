@@ -45,6 +45,10 @@ view: tiers_dashboard_table {
     type: string
     sql: ${TABLE}.ImplementationStep ;;
   }
+  measure: count_of_answers {
+    type: count
+    #sql: ${TABLE}.AnswersID ;;
+  }
   dimension: implementation_title {
     type: string
     sql: ${TABLE}.ImplementationTitle ;;
