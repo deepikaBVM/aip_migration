@@ -195,6 +195,11 @@ view: tiers_dashboard_table {
     type: count
     drill_fields: [school_name, district_name, tier_name, plan_name, strategy_name]
   }
+  dimension: map_district_name {
+    type: string
+    map_layer_name: school_districts
+    sql: ${TABLE}.DistrictName ;;
+  }
 
 
 
