@@ -97,6 +97,10 @@ view: aip_rootcausetiers {
     type: count
     drill_fields: [detail*]
   }
+  measure: dashboardtype {
+    type: string
+    sql: ${TABLE}.DashboardType ;;
+  }
 
   measure: total_schools {
     type: count_distinct
