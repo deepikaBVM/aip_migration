@@ -96,7 +96,9 @@ view: aip_rootcausetiers {
   measure: count_of_districtid {
     type: count_distinct
     sql: ${school_district_id} ;;
+    drill_fields: [district_name, school_name]
   }
+
   dimension: school_id {
     type: number
     sql: ${TABLE}.SchoolID ;;
@@ -104,6 +106,7 @@ view: aip_rootcausetiers {
   measure: count_of_schoolid {
     type: count_distinct
     sql: ${school_id} ;;
+    drill_fields: [district_name, school_name]
   }
   dimension: school_name {
     type: string
