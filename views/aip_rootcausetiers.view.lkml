@@ -55,6 +55,20 @@ view: aip_rootcausetiers {
     type: string
     sql: ${TABLE}.Question ;;
   }
+  dimension: question_short_name {
+    type: string
+    sql:
+    CASE
+      WHEN ${question} = 'Have community members been involved to gather diverse perspectives on absenteeism?' THEN 'Community Input'
+      WHEN ${question} = 'Have interviews with parents or guardians been conducted to better understand external challenges?' THEN 'Parent Interviews'
+      WHEN ${question} = 'Have student focus groups been utilized to gain insights into the reasons behind absenteeism?' THEN 'Student Focus Groups'
+      WHEN ${question} = 'Has feedback been collected from teachers, counselors, and school staff regarding challenges within the classroom?' THEN 'Staff Feedback'
+      WHEN ${question} = 'Have school environments been observed for factors impacting student engagement, safety, and climate?' THEN 'School Observation'
+      WHEN ${question} = 'Have students with chronic absenteeism been shadowed to identify the daily challenges they face?' THEN 'Student Shadowing'
+      ELSE ${question}
+    END ;;
+  }
+
   dimension: root_cause_challenge {
     type: string
     sql: ${TABLE}."Root Cause Challenge" ;;
