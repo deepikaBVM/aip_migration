@@ -163,6 +163,22 @@ view: tiers_dashboard_table {
     type: string
     sql: ${TABLE}.StrategyName ;;
   }
+  dimension: strategy_short_name {
+    type: string
+    sql:
+    CASE
+      WHEN ${strategy_name} = 'Assessing student and family needs to provide tailored support' THEN 'Tailored Support'
+      WHEN ${strategy_name} = 'Collaboration with external agencies, including child welfare, to provide comprehensive support' THEN 'Agency Collaboration'
+      WHEN ${strategy_name} = 'Creating an engaging school climate' THEN 'School Climate'
+      WHEN ${strategy_name} = 'Creating detailed intervention plans focused on keeping students engaged in an educational setting' THEN 'Intervention Plans'
+      WHEN ${strategy_name} = 'Fostering positive relationships with students and families' THEN 'Relationships'
+      WHEN ${strategy_name} = 'Intensive case management and wraparound services to address severe attendance issues' THEN 'Case Management'
+      WHEN ${strategy_name} = 'Personalized outreach to students and families' THEN 'Outreach'
+      WHEN ${strategy_name} = 'Weekly progress monitoring to track attendance and adjust interventions as needed' THEN 'Progress Monitoring'
+      ELSE ${strategy_name}
+    END ;;
+  }
+
   dimension: strategy_title {
     type: string
     sql: ${TABLE}.StrategyTitle ;;
