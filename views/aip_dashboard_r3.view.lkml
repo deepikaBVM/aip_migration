@@ -183,7 +183,7 @@ dimension: grade_item_code {
     type: sum
     label: "No. of Student in Tier 1"
     sql: CAST(${TABLE}.EnrollNumber as INT) -  CAST(${TABLE}.Tier2Absentee as INT) - CAST(${TABLE}.Tier3Absentee as INT) - CAST(${TABLE}.Tier4Absentee as INT);;
-    drill_fields: [district_code,district_name,school_code,school_name, grade_item_code, tier1_absent_student]
+    drill_fields: [district_code,district_name,school_code,school_name, grade_item_code, tier1_absent_student, tier2_absent_student, tier3_absent_student, tier4_absent_student]
   }
 
   measure: tier1_absent_student_subpop {
@@ -197,7 +197,7 @@ dimension: grade_item_code {
     type: number
     value_format_name: "percent_2"
     sql: CAST(${tier1_absent_student} AS FLOAT) / NULLIF(${enroll_number}, 0) ;;
-    drill_fields: [district_code,district_name, school_code,school_name, Tier1_percentage]
+    drill_fields: [district_code,district_name, school_code,school_name, Tier1_percentage, Tier2_percentage, Tier3_percentage, Tier4_percentage]
   }
 
   measure: tier2_absence_rate {
