@@ -215,3 +215,4 @@ explore: tbl_starsschool_sub_pop_data_cr {
 
 explore: tbl_starssnap_shot_data_cr {}
 explore: aip_rootcause_dashboard {}
+explore: aip_rootcausetiers {}

@@ -45,6 +45,10 @@ view: tiers_dashboard_table {
     type: string
     sql: ${TABLE}.ImplementationStep ;;
   }
+  measure: count_of_answers {
+    type: count
+    #sql: ${TABLE}.AnswersID ;;
+  }
   dimension: implementation_title {
     type: string
     sql: ${TABLE}.ImplementationTitle ;;
@@ -183,9 +187,18 @@ view: tiers_dashboard_table {
     type: number
     sql: ${TABLE}.ToYear ;;
   }
+  dimension: postalcode {
+    type: zipcode
+    sql: ${TABLE}.postalcode ;;
+  }
   measure: count {
     type: count
     drill_fields: [school_name, district_name, tier_name, plan_name, strategy_name]
+  }
+  dimension: map_district_name {
+    type: string
+    map_layer_name: school_districts
+    sql: ${TABLE}.DistrictName ;;
   }
 
 
