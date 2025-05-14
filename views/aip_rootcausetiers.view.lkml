@@ -33,9 +33,23 @@ view: aip_rootcausetiers {
     type: string
     sql: ${TABLE}.IsPlanSubmitted ;;
   }
-  dimension: plan_id {
+  dimension: IsCertified_Label {
+    type: string
+    sql: CASE
+         WHEN ${TABLE}.IsPlanSubmitted  = YES THEN 'Submitted'
+         WHEN ${TABLE}.IsPlanSubmitted  = NO THEN 'Plan Created But Not Submitted'
+         WHEN ${TABLE}.IsPlanSubmitted  IS NULL OR ${plan_id} IS NULL THEN 'No Plan'
+         ELSE NULL
+       END ;;
+    group_label: "Certification"
+  }
+   dimension: plan_id {
     type: number
-    sql: ${TABLE}.PlanID ;;
+    sql: CASE WHEN ${TABLE}.PlanID IS NOT NULL THEN ${TABLE}.PlanID ELSE NULL END ;;
+  }
+  measure: plan_count {
+    type: count_distinct
+    sql: ${plan_id} ;;
   }
   dimension: question {
     type: string
