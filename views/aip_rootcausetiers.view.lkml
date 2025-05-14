@@ -79,9 +79,17 @@ view: aip_rootcausetiers {
     type: number
     sql: ${TABLE}.SchoolDistrictId ;;
   }
+  measure: count_of_districtid {
+    type: count_distinct
+    sql: ${school_district_id} ;;
+  }
   dimension: school_id {
     type: number
     sql: ${TABLE}.SchoolID ;;
+  }
+  measure: count_of_schoolid {
+    type: count_distinct
+    sql: ${school_id} ;;
   }
   dimension: school_name {
     type: string
