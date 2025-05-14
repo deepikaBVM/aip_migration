@@ -36,8 +36,8 @@ view: aip_rootcausetiers {
   dimension: IsCertified_Label {
     type: string
     sql: CASE
-         WHEN ${TABLE}.IsPlanSubmitted  = YES THEN 'Submitted'
-         WHEN ${TABLE}.IsPlanSubmitted  = NO THEN 'Plan Created But Not Submitted'
+         WHEN ${TABLE}.IsPlanSubmitted  = 'YES' THEN 'Submitted'
+         WHEN ${TABLE}.IsPlanSubmitted  = 'NO' THEN 'Plan Created But Not Submitted'
          WHEN ${TABLE}.IsPlanSubmitted  IS NULL OR ${plan_id} IS NULL THEN 'No Plan'
          ELSE NULL
        END ;;
