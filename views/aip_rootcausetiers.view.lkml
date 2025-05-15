@@ -39,13 +39,10 @@ view: aip_rootcausetiers {
     sql: CASE
           WHEN ${TABLE}.IsPlanSubmitted = 'YES' THEN 'Submitted'
           WHEN ${TABLE}.IsPlanSubmitted = 'NO' THEN 'Plan Created But Not Submitted'
-          WHEN (${TABLE}.IsPlanSubmitted IS NULL OR ${TABLE}.PlanID IS NULL)
-               AND ${TABLE}.SchoolID IS NOT NULL THEN 'No Plan (School)'
-          WHEN (${TABLE}.IsPlanSubmitted IS NULL OR ${TABLE}.PlanID IS NULL)
-               AND ${TABLE}.SchoolID IS NULL THEN 'No Plan (District)'
-        END ;;
-    #group_label: "Certification"
-  }
+          WHEN ${TABLE}.IsPlanSubmitted IS NULL OR ${TABLE}.PlanID IS NULL THEN 'No Plan'
+          END ;;
+          #group_label: "Certification"
+    }
   measure: district_count {
     type: count
   }
@@ -102,6 +99,7 @@ view: aip_rootcausetiers {
   measure: count_of_districtid {
     type: count_distinct
     sql: ${school_district_id} ;;
+    filters: [school_id: "NULL"]
     drill_fields: [district_name, school_name]
   }
 
