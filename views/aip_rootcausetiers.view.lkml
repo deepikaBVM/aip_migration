@@ -38,7 +38,7 @@ view: aip_rootcausetiers {
     sql: CASE
          WHEN ${TABLE}.IsPlanSubmitted  = 'YES' THEN 'Submitted'
          WHEN ${TABLE}.IsPlanSubmitted  = 'NO' THEN 'Plan Created But Not Submitted'
-         WHEN ${TABLE}.IsPlanSubmitted  IS NULL OR ${TABLE}.PlanID IS NULL THEN 'No Plan'
+         WHEN ${TABLE}.IsPlanSubmitted IS NULL AND ${TABLE}.PlanID IS NULL THEN 'No Plan'
          ELSE NULL
        END ;;
     group_label: "Certification"
