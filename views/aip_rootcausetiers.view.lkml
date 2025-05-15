@@ -36,13 +36,14 @@ view: aip_rootcausetiers {
   dimension: IsCertified_Label {
     type: string
     sql: CASE
-    WHEN COALESCE(${TABLE}.IsPlanSubmitted, '') = 'YES' THEN 'Submitted'
-    WHEN COALESCE(${TABLE}.IsPlanSubmitted, '') = 'NO' THEN 'Plan Created But Not Submitted'
-    WHEN COALESCE(${TABLE}.IsPlanSubmitted, '') = '' AND ${TABLE}.PlanID IS NULL THEN 'No Plan'
-    ELSE NULL
+    WHEN ${TABLE}.IsPlanSubmitted = 'YES' THEN 'Submitted'
+    WHEN ${TABLE}.IsPlanSubmitted = 'NO' THEN 'Plan Created But Not Submitted'
+    WHEN ${TABLE}.IsPlanSubmitted IS NULL AND ${TABLE}.PlanID IS NULL THEN 'No Plan'
+    ELSE 'Other Status' -- Change NULL to a value to debug
     END ;;
-    group_label: "Certification"
+    #group_label: "Certification"
   }
+
 dimension: plan_id {
     type: number
     sql: CASE WHEN ${TABLE}.PlanID IS NOT NULL THEN ${TABLE}.PlanID ELSE NULL END ;;
