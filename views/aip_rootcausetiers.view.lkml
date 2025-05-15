@@ -43,21 +43,8 @@ view: aip_rootcausetiers {
     END ;;
     #group_label: "Certification"
   }
-  measure: count_submitted {
-    type: sum
-    sql: CASE WHEN ${TABLE}.IsPlanSubmitted = 'YES' THEN 1 ELSE 0 END ;;
-  }
 
-  measure: count_created_not_submitted {
-    type: sum
-    sql: CASE WHEN ${TABLE}.IsPlanSubmitted = 'NO' THEN 1 ELSE 0 END ;;
-  }
-
-  measure: count_no_plan {
-    type: sum
-    sql: CASE WHEN ${TABLE}.IsPlanSubmitted IS NULL AND ${TABLE}.PlanID IS NULL THEN 1 ELSE 0 END ;;
-  }
-dimension: plan_id {
+  dimension: plan_id {
     type: number
     sql: CASE WHEN ${TABLE}.PlanID IS NOT NULL THEN ${TABLE}.PlanID ELSE NULL END ;;
   }
