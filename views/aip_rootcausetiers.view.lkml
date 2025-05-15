@@ -34,16 +34,19 @@ view: aip_rootcausetiers {
     sql: ${TABLE}.IsPlanSubmitted ;;
   }
   dimension: IsCertified_Label {
+
     type: string
     sql: CASE
-         WHEN ${TABLE}.IsPlanSubmitted  = 'YES' THEN 'Submitted'
-         WHEN ${TABLE}.IsPlanSubmitted  = 'NO' THEN 'Plan Created But Not Submitted'
-         WHEN ${TABLE}.IsPlanSubmitted  IS NULL OR ${plan_id} IS NULL THEN 'No Plan'
-         ELSE NULL
-       END ;;
-    group_label: "Certification"
+          WHEN ${TABLE}.IsPlanSubmitted = 'YES' THEN 'Submitted'
+          WHEN ${TABLE}.IsPlanSubmitted = 'NO' THEN 'Plan Created But Not Submitted'
+          WHEN ${TABLE}.IsPlanSubmitted IS NULL OR ${TABLE}.PlanID IS NULL THEN 'No Plan'
+          END ;;
+          #group_label: "Certification"
+    }
+  measure: district_count {
+    type: count
   }
-   dimension: plan_id {
+  dimension: plan_id {
     type: number
     sql: CASE WHEN ${TABLE}.PlanID IS NOT NULL THEN ${TABLE}.PlanID ELSE NULL END ;;
   }
@@ -55,6 +58,20 @@ view: aip_rootcausetiers {
     type: string
     sql: ${TABLE}.Question ;;
   }
+  dimension: question_short_name {
+    type: string
+    sql:
+    CASE
+      WHEN ${question} = 'Have community members been involved to gather diverse perspectives on absenteeism?' THEN 'Community Input'
+      WHEN ${question} = 'Have interviews with parents or guardians been conducted to better understand external challenges?' THEN 'Parent Interviews'
+      WHEN ${question} = 'Have student focus groups been utilized to gain insights into the reasons behind absenteeism?' THEN 'Student Focus Groups'
+      WHEN ${question} = 'Has feedback been collected from teachers, counselors, and school staff regarding challenges within the classroom?' THEN 'Staff Feedback'
+      WHEN ${question} = 'Have school environments been observed for factors impacting student engagement, safety, and climate?' THEN 'School Observation'
+      WHEN ${question} = 'Have students with chronic absenteeism been shadowed to identify the daily challenges they face?' THEN 'Student Shadowing'
+      ELSE ${question}
+    END ;;
+  }
+
   dimension: root_cause_challenge {
     type: string
     sql: ${TABLE}."Root Cause Challenge" ;;
@@ -82,7 +99,10 @@ view: aip_rootcausetiers {
   measure: count_of_districtid {
     type: count_distinct
     sql: ${school_district_id} ;;
+    filters: [school_id: "NULL"]
+    drill_fields: [district_name, school_name]
   }
+
   dimension: school_id {
     type: number
     sql: ${TABLE}.SchoolID ;;
@@ -90,6 +110,7 @@ view: aip_rootcausetiers {
   measure: count_of_schoolid {
     type: count_distinct
     sql: ${school_id} ;;
+    drill_fields: [district_name, school_name]
   }
   dimension: school_name {
     type: string
@@ -107,6 +128,22 @@ view: aip_rootcausetiers {
     type: string
     sql: ${TABLE}.StrategyName ;;
   }
+  dimension: strategy_short_name {
+    type: string
+    sql:
+    CASE
+      WHEN ${strategy_name} = 'Assessing student and family needs to provide tailored support' THEN 'Tailored Support'
+      WHEN ${strategy_name} = 'Collaboration with external agencies, including child welfare, to provide comprehensive support' THEN 'Agency Collaboration'
+      WHEN ${strategy_name} = 'Creating an engaging school climate' THEN 'School Climate'
+      WHEN ${strategy_name} = 'Creating detailed intervention plans focused on keeping students engaged in an educational setting' THEN 'Intervention Plans'
+      WHEN ${strategy_name} = 'Fostering positive relationships with students and families' THEN 'Relationships'
+      WHEN ${strategy_name} = 'Intensive case management and wraparound services to address severe attendance issues' THEN 'Case Management'
+      WHEN ${strategy_name} = 'Personalized outreach to students and families' THEN 'Outreach'
+      WHEN ${strategy_name} = 'Weekly progress monitoring to track attendance and adjust interventions as needed' THEN 'Progress Monitoring'
+      ELSE ${strategy_name}
+    END ;;
+  }
+
   dimension: tier_name {
     type: string
     sql: ${TABLE}.TierName ;;
@@ -168,7 +205,8 @@ view: aip_rootcausetiers {
     label: "% of Schools with Factor"
   }
 
-  # ----- Sets of fields for drilling ------
+
+   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
   district_name,
