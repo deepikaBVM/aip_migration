@@ -42,7 +42,7 @@ view: aip_rootcausetiers {
     ELSE 'No Plan'
     END ;;
     #group_label: "Certification"
-}
+  }
   measure: district_count {
     type: count
   }
