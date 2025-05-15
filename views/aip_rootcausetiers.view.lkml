@@ -42,8 +42,8 @@ view: aip_rootcausetiers {
          ELSE NULL
        END ;;
     group_label: "Certification"
-  }
-   dimension: plan_id {
+}
+  dimension: plan_id {
     type: number
     sql: CASE WHEN ${TABLE}.PlanID IS NOT NULL THEN ${TABLE}.PlanID ELSE NULL END ;;
   }
@@ -201,7 +201,8 @@ view: aip_rootcausetiers {
     label: "% of Schools with Factor"
   }
 
-  # ----- Sets of fields for drilling ------
+
+   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
   district_name,
