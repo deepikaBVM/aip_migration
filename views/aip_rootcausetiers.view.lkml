@@ -38,7 +38,8 @@ view: aip_rootcausetiers {
     sql: CASE
     WHEN ${TABLE}.IsPlanSubmitted = 'YES' THEN 'Submitted'
     WHEN ${TABLE}.IsPlanSubmitted = 'NO' THEN 'Plan Created But Not Submitted'
-    WHEN ${TABLE}.IsPlanSubmitted IS NULL OR ${TABLE}.PlanID IS NULL THEN 'No Plan'
+    WHEN ${TABLE}.IsPlanSubmitted IS NULL OR ${TABLE}.PlanID IS NULL AND ${TABLE}.SchoolID IS NOT NULL THEN 'No Plan school'
+    WHEN ${TABLE}.IsPlanSubmitted IS NULL OR ${TABLE}.PlanID IS NULL AND ${TABLE}.SchoolID IS NULL THEN 'No Plan District'
     END ;;
     #group_label: "Certification"
   }
