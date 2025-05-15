@@ -211,7 +211,7 @@ dimension: grade_item_code {
     type: sum
     label: "No. of Student in Tier 2"
     sql: CAST(${TABLE}.Tier2Absentee as INT);;
-    drill_fields: [district_code,district_name,school_code,school_name,grade_item_code, tier2_absent_student]
+    drill_fields: [district_code,district_name,school_code,school_name,grade_item_code, tier1_absent_student, tier2_absent_student, tier3_absent_student, tier4_absent_student]
 
   }
 
@@ -227,7 +227,7 @@ dimension: grade_item_code {
     type: number
     value_format_name: "percent_2"
     sql: CAST(${tier2_absent_student} AS FLOAT) / NULLIF(${enroll_number}, 0) ;;
-    drill_fields: [district_code,district_name, school_code,school_name, Tier2_percentage]
+    drill_fields: [district_code,district_name, school_code,school_name, Tier1_percentage, Tier2_percentage, Tier3_percentage, Tier4_percentage]
   }
 
   measure: tier3_absence_rate {
@@ -241,7 +241,7 @@ dimension: grade_item_code {
     type: sum
     label: "No. of Student in Tier 3"
     sql: CAST(${TABLE}.Tier3Absentee as INT) ;;
-    drill_fields: [district_code,district_name,school_code,school_name,grade_item_code, tier3_absent_student]
+    drill_fields: [district_code,district_name,school_code,school_name,grade_item_code, tier1_absent_student, tier2_absent_student, tier3_absent_student, tier4_absent_student]
 
   }
 
@@ -257,7 +257,7 @@ dimension: grade_item_code {
     type: number
     value_format_name: "percent_2"
     sql: CAST(${tier3_absent_student} AS FLOAT) / NULLIF(${enroll_number}, 0) ;;
-    drill_fields: [district_code,district_name, school_code,school_name, Tier3_percentage]
+    drill_fields: [district_code,district_name, school_code,school_name, Tier1_percentage, Tier2_percentage, Tier3_percentage, Tier4_percentage]
   }
 
   measure: tier4_absence_rate {
@@ -271,7 +271,7 @@ dimension: grade_item_code {
     type: sum
     label: "No. of Student in Tier 4"
     sql: CAST(${TABLE}.Tier4Absentee as INT) ;;
-    drill_fields: [district_code,district_name,school_code,school_name,grade_item_code, tier4_absent_student]
+    drill_fields: [district_code,district_name,school_code,school_name,grade_item_code, tier1_absent_student, tier2_absent_student, tier3_absent_student, tier4_absent_student]
 
   }
 
@@ -287,7 +287,7 @@ dimension: grade_item_code {
     type: number
     value_format_name: "percent_2"
     sql: CAST(${tier4_absent_student} AS FLOAT) / NULLIF(${enroll_number}, 0) ;;
-    drill_fields: [district_code,district_name, school_code,school_name, Tier4_percentage]
+    drill_fields: [district_code,district_name, school_code,school_name, Tier1_percentage, Tier2_percentage, Tier3_percentage, Tier4_percentage]
   }
 
   measure: total_days_enrolled {
@@ -295,27 +295,22 @@ dimension: grade_item_code {
     sql: CAST(${TABLE}.TotalDaysEnrolled as INT) ;;
   }
   measure: total_days_excused_absence {
-    type: average
+    type: sum
     sql: CAST(${TABLE}.TotalDaysExcusedAbsence as INT) ;;
   }
+
+
+
   measure: total_days_present {
     type: sum
     sql: CAST(${TABLE}.TotalDaysPresent as INT) ;;
   }
   measure: total_days_unexcused_absence {
-    type: average
+    type: sum
     sql: CAST(${TABLE}.TotalDaysUnexcusedAbsence as INT) ;;
   }
-  measure: avg_days_unexcused_absence {
-    type: average
-    label: "Average Days Unexcused Absence"
-    sql: ${TABLE}.TotalDaysUnexcusedAbsence ;;
-  }
-  measure: avg_days_excused_absence {
-    type: average
-    label: "Average Excused Absences"
-    sql: ${TABLE}.TotalDaysExcusedAbsence ;;
-  }
+
+
   measure: count {
     type: count
     drill_fields: [district_name, school_name]
