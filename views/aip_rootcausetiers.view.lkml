@@ -34,13 +34,16 @@ view: aip_rootcausetiers {
     sql: ${TABLE}.IsPlanSubmitted ;;
   }
   dimension: IsCertified_Label {
+
     type: string
     sql: CASE
-    WHEN ${TABLE}.IsPlanSubmitted = 'YES' THEN 'Submitted'
-    WHEN ${TABLE}.IsPlanSubmitted = 'NO' THEN 'Plan Created But Not Submitted'
-    WHEN ${TABLE}.IsPlanSubmitted IS NULL OR ${TABLE}.PlanID IS NULL AND ${TABLE}.SchoolID IS NOT NULL THEN 'No Plan school'
-    WHEN ${TABLE}.IsPlanSubmitted IS NULL OR ${TABLE}.PlanID IS NULL AND ${TABLE}.SchoolID IS NULL THEN 'No Plan District'
-    END ;;
+          WHEN ${TABLE}.IsPlanSubmitted = 'YES' THEN 'Submitted'
+          WHEN ${TABLE}.IsPlanSubmitted = 'NO' THEN 'Plan Created But Not Submitted'
+          WHEN (${TABLE}.IsPlanSubmitted IS NULL OR ${TABLE}.PlanID IS NULL)
+               AND ${TABLE}.SchoolID IS NOT NULL THEN 'No Plan (School)'
+          WHEN (${TABLE}.IsPlanSubmitted IS NULL OR ${TABLE}.PlanID IS NULL)
+               AND ${TABLE}.SchoolID IS NULL THEN 'No Plan (District)'
+        END ;;
     #group_label: "Certification"
   }
   measure: district_count {
