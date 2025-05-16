@@ -29,6 +29,13 @@ view: aip_rootcausetiers {
     type: string
     sql: ${TABLE}.ImplementationName ;;
   }
+  measure: ImplemenationSteps_Status {
+    type: string
+    sql: CASE
+    WHEN ${TABLE}.ImplementationName IS NOT NULL THEN "No Step"
+    WHEN ${TABLE}.ImplementationName IS NULL THEN "Step"
+    END ;;
+  }
   dimension: is_plan_submitted {
     type: string
     sql: ${TABLE}.IsPlanSubmitted ;;
