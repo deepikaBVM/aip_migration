@@ -29,11 +29,11 @@ view: aip_rootcausetiers {
     type: string
     sql: ${TABLE}.ImplementationName ;;
   }
-  dimension: ImplemenationSteps_Status {
+  dimension: ImplementationSteps_Status {
     type: string
     sql: CASE
-          WHEN ${TABLE}.ImplementationName IS NOT NULL THEN 'Step'
           WHEN ${TABLE}.ImplementationName IS NULL THEN 'No Step'
+          ELSE 'Step'
           END ;;
   }
   measure: ImplementationSteps_count {
