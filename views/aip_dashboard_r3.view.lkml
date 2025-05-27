@@ -315,4 +315,9 @@ dimension: grade_item_code {
     type: count
     drill_fields: [district_name, school_name]
   }
+
+  dimension: ProgressUpdate {
+  type: string
+  sql: ${TABLE}.ProgressUpdate ;;
+  }
 }
