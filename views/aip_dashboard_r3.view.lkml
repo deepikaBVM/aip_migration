@@ -320,4 +320,13 @@ dimension: grade_item_code {
   type: string
   sql: ${TABLE}.ProgressUpdate ;;
   }
+
+  dimension: dynamic_progress_update {
+    type: string
+    sql:
+    CASE
+      WHEN ${school_year} >= '2024-2025' THEN ${ProgressUpdate}
+      ELSE 'EOY'
+    END ;;
+  }
 }
