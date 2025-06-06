@@ -322,4 +322,20 @@ dimension: grade_item_code {
     type: count
     drill_fields: [district_name, school_name]
   }
+
+  dimension: ProgressUpdate {
+  type: string
+  sql: ${TABLE}.ProgressUpdate ;;
+  }
+# The conditional dimension for filtering
+
+  dimension: dynamic_progress_update {
+    type: string
+    sql:
+      CASE
+        WHEN ${school_year} >= '2024-2025' THEN ${ProgressUpdate}
+        ELSE 'EOY'
+      END ;;
+  }
+
 }
