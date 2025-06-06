@@ -46,7 +46,14 @@ view: aip_dashboard_r3 {
   measure: enroll_number {
     type: sum
     sql: CAST(${TABLE}.EnrollNumber AS INT) ;;
-    drill_fields: [district_code,district_name, school_code,school_name,enroll_number]
+    #drill_fields: [district_code,district_name, school_code,school_name,enroll_number]
+
+link: {
+
+  label: "Drill to Enrollment Details"
+  url: "https://nmpedpublic.cloud.looker.com/explore/aip_dashboard_r3/aip_dashboard_r3?fields=aip_dashboard_r3.district_code,aip_dashboard_r3.district_name,aip_dashboard_r3.school_code,aip_dashboard_r3.school_name,aip_dashboard_r3.enroll_number&f[aip_dashboard_r3.district_code]=%{district_code}&f[aip_dashboard_r3.school_code]=%{school_code}"
+}
+
   }
 
   measure: subpop_enroll_number {
